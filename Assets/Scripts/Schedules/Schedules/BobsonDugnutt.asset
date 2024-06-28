@@ -18,7 +18,7 @@ MonoBehaviour:
     time:
       day: 0
       hour: 8
-      minute: 0
+      minute: 2
     dayOfTheWeek: 1
     priority: 0
     ignoreDayOfTheWeek: 1

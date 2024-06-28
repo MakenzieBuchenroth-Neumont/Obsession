@@ -14,13 +14,13 @@ public class TimeManager : MonoBehaviour {
 	[Header("Day and Night Cycle")]
 	[SerializeField] Transform sunTransform;
 
-
 	private void Awake() {
 		if (Instance != null && Instance != this) {
 			Destroy(this);
 		}
 		else {
 			Instance = this;
+			DontDestroyOnLoad(this.gameObject);
 		}
 	}
 
@@ -39,8 +39,8 @@ public class TimeManager : MonoBehaviour {
 	public void Tick() {
 		timestamp.UpdateClock();
 
-		foreach (ITimeTracker listener in listeners) {
-			listener.clockUpdate(timestamp);
+		foreach (ITimeTracker tracker in timeTrackers) {
+			tracker.clockUpdate(timestamp);
 		}
 
 		updateSunMovement();
@@ -54,7 +54,7 @@ public class TimeManager : MonoBehaviour {
 		//.25 degrees in a minute
 		// at midnight 00:00, the angle of the sun is -90
 
-		float sunAngle = .25f * timeInMinutes - 90;
+		float sunAngle = 0.25f * timeInMinutes - 90;
 
 		// apply the angle to the directional light
 		sunTransform.eulerAngles = new Vector3(sunAngle, 0, 0);

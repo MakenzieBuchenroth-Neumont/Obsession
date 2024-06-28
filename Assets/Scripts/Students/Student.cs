@@ -10,7 +10,7 @@ public class Student : ScriptableObject {
 	[SerializeField] studentPersonality personality = new studentPersonality();
 	[SerializeField] studentClass Class = new studentClass();
 	[SerializeField] Sprite studentImage;
-	[SerializeField] GameObject prefab;
+	[SerializeField] public GameObject prefab;
 
 	enum studentYear {
 		One = 1,
