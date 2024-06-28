@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82ad610d35af17044baa6b100c938346, type: 3}
+  m_Name: Knife
+  m_EditorClassIdentifier: 
+  description: A knife, helpful for cooking. Could be used for nefarious purposes.
+  thumbnail: {fileID: 21300000, guid: f362fb8f69d0bbf49bc776a9622c9554, type: 3}
+  gameModel: {fileID: 3100519388199447950, guid: cc4f80c9199a8a54e9d9c15297f2a66a,
+    type: 3}
+  equipmentType: 0
