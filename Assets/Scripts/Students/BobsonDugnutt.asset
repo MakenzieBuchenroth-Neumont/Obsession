@@ -18,3 +18,4 @@ MonoBehaviour:
   Class: 13
   studentImage: {fileID: 0}
   prefab: {fileID: 3560688789821167033, guid: 43074d51f192b4b468c9ace7102f7a3b, type: 3}
+  spawnPoint: {x: 14.29, y: 0.25, z: -6.49}

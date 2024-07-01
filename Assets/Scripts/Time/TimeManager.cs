@@ -8,7 +8,7 @@ public class TimeManager : MonoBehaviour {
 	private List<ITimeTracker> timeTrackers = new List<ITimeTracker>();
 
 	[Header("Internal Clock")]
-	[SerializeField] GameTimestamp timestamp;
+	[SerializeField] public GameTimestamp timestamp;
 	public float timeScale = 1.0f;
 
 	[Header("Day and Night Cycle")]

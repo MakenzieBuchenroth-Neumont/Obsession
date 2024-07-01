@@ -11,6 +11,7 @@ public class Student : ScriptableObject {
 	[SerializeField] studentClass Class = new studentClass();
 	[SerializeField] Sprite studentImage;
 	[SerializeField] public GameObject prefab;
+	[SerializeField] public Vector3 spawnPoint;
 
 	enum studentYear {
 		One = 1,
