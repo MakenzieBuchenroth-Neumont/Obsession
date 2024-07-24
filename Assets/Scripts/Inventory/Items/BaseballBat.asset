@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82ad610d35af17044baa6b100c938346, type: 3}
-  m_Name: Baseball Bat
+  m_Name: BaseballBat
   m_EditorClassIdentifier: 
   description: A baseball bat. Could do some real harm if swung hard enough.
   thumbnail: {fileID: 21300000, guid: e357d9bd62745e748be012874055b8d0, type: 3}
   gameModel: {fileID: 1671221402494773858, guid: 98da212a627f5df4ca8d4771871edf90,
     type: 3}
+  name: BaseballBat
   equipmentType: 2

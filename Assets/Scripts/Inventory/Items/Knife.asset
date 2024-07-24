@@ -16,4 +16,5 @@ MonoBehaviour:
   thumbnail: {fileID: 21300000, guid: f362fb8f69d0bbf49bc776a9622c9554, type: 3}
   gameModel: {fileID: 3100519388199447950, guid: cc4f80c9199a8a54e9d9c15297f2a66a,
     type: 3}
+  name: Knife
   equipmentType: 0

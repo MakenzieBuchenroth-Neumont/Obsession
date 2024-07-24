@@ -17,4 +17,5 @@ MonoBehaviour:
   thumbnail: {fileID: 21300000, guid: 7241c81a062326f498a6593145159260, type: 3}
   gameModel: {fileID: 2047205693126173021, guid: 255137f4e99677a40bece318096e93d9,
     type: 3}
+  name: Scissors
   equipmentType: 1
