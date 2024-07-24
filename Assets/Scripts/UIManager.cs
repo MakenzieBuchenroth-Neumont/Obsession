@@ -81,7 +81,7 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 			toolEquipSlot.gameObject.SetActive(true);
 
 			toolEquipSlotParent.color = Color.clear;
-			toolHandSlotParent.color = Color.clear;
+			//toolHandSlotParent.color = Color.clear;
 
 			return;
 		}
