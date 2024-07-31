@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -96,9 +97,38 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		NavMeshAgent navAgent = npcInstance.GetComponent<NavMeshAgent>();
 		Vector3 targetPosition = scheduleEvent.coord;
 
-		navAgent.SetDestination(targetPosition);
+		Vector3 nearestPathPosition = FindNearestPathPoint(npcInstance.transform.position);
+		navAgent.SetDestination(nearestPathPosition);
 
-		float distance = Vector3.Distance(navAgent.transform.position, targetPosition);
+		navAgent.speed = walkingSpeed;
+		npcInstance.transform.eulerAngles = scheduleEvent.facing;
+
+		StartCoroutine(FollowPath(navAgent, nearestPathPosition, targetPosition, scheduleEvent));
+	}
+
+	private Vector3 FindNearestPathPoint(Vector3 currentPosition) {
+		Waypoint[] waypoints = FindAnyObjectByType<Waypoint>();
+		Vector3 nearestPoint = currentPosition;
+		float shortestDistance = float.MaxValue;
+
+		foreach (Waypoint waypoint in waypoints) {
+			float distance = Vector3.Distance(currentPosition, waypoint.transform.position);
+			if (distance < shortestDistance) {
+				shortestDistance = distance;
+				nearestPoint = waypoint.transform.position;
+			}
+		}
+		return nearestPoint;
+	}
+
+	private IEnumerator FollowPath(NavMeshAgent navAgent, Vector3 initialTarget, Vector3 finalTarget, ScheduleEvent scheduleEvent, GameTimestamp currentTime, Student student) {
+		while (navAgent.remainingDistance > navAgent.stoppingDistance) {
+			yield return null;
+		}
+
+		navAgent.SetDestination(finalTarget);
+
+		float distance = Vector3.Distance(navAgent.transform.position, finalTarget);
 		float travelTimeInSeconds = distance / walkingSpeed;
 		float travelTimeInMinutes = travelTimeInSeconds / 60;
 
@@ -106,32 +136,18 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		int eventMinutes = scheduleEvent.time.hour * 60 + scheduleEvent.time.minute;
 		int availableMinutes = eventMinutes - currentMinutes;
 
-		Debug.Log($"NPC {student.name} preparing for event '{scheduleEvent.name}'");
-		Debug.Log($"Current Position: {navAgent.transform.position}, Target Position: {targetPosition}");
-		Debug.Log($"Available Minutes: {availableMinutes}, Required Travel Time: {travelTimeInMinutes} minutes");
-
-		// Check if it's time to start moving
-		if (availableMinutes >= 0) {
-			if (availableMinutes * 60 >= travelTimeInSeconds) {
-				navAgent.speed = walkingSpeed;
-				npcInstance.transform.eulerAngles = scheduleEvent.facing;
-				Debug.Log($"NPC {student.name} is walking to {targetPosition} from {navAgent.transform.position}.");
+		if (availableMinutes * 60 < travelTimeInSeconds) {
+			float maxLatenessInSeconds = maxAcceptableLateness * 60;
+			float runTravelTimeInSeconds = distance / runningSpeed;
+			if (availableMinutes * 60 + maxLatenessInSeconds >= runTravelTimeInSeconds) {
+				navAgent.speed = runningSpeed;
 			}
 			else {
-				float maxLatenessInSeconds = maxAcceptableLateness * 60;
-				float runTravelTimeInSeconds = distance / runningSpeed;
-				if (availableMinutes * 60 + maxLatenessInSeconds >= runTravelTimeInSeconds) {
-					navAgent.speed = runningSpeed;
-					npcInstance.transform.eulerAngles = scheduleEvent.facing;
-					Debug.Log($"NPC {student.name} is running to {targetPosition} from {navAgent.transform.position}.");
-				}
-				else {
-					Debug.LogError($"NPC {student.name} does not have enough time to walk or run to the next event.");
-				}
+				Debug.LogError($"NPC {student.name} does not have enough time to walk or run to the next event.");
 			}
 		}
 		else {
-			Debug.Log($"NPC {student.name} cannot start moving yet. Waiting for the event time.");
+			navAgent.speed = walkingSpeed;
 		}
 	}
 
