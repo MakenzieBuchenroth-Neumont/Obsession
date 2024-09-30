@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.Rendering.VolumeComponent;
@@ -98,16 +99,26 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		Vector3 targetPosition = scheduleEvent.coord;
 
 		Vector3 nearestPathPosition = FindNearestPathPoint(npcInstance.transform.position);
-		navAgent.SetDestination(nearestPathPosition);
 
-		navAgent.speed = walkingSpeed;
-		npcInstance.transform.eulerAngles = scheduleEvent.facing;
+		int currentMinutes = currentTime.hour * 60 + currentTime.minute;
+		int eventMinutes = scheduleEvent.time.hour * 60 + scheduleEvent.time.minute;
+		int availableMinutes = eventMinutes - currentMinutes;
 
-		StartCoroutine(FollowPath(navAgent, nearestPathPosition, targetPosition, scheduleEvent));
+		if (availableMinutes >= 0) {
+			navAgent.SetDestination(nearestPathPosition);
+
+			navAgent.speed = walkingSpeed;
+			npcInstance.transform.eulerAngles = scheduleEvent.facing;
+
+			StartCoroutine(FollowPath(navAgent, nearestPathPosition, targetPosition, scheduleEvent, currentTime, student));
+		}
+		else {
+			Debug.Log("$\"NPC {student.name} cannot start moving yet. Waiting for the event time.\");");
+		}
 	}
 
 	private Vector3 FindNearestPathPoint(Vector3 currentPosition) {
-		Waypoint[] waypoints = FindAnyObjectByType<Waypoint>();
+		Waypoint[] waypoints = FindObjectsOfType<Waypoint>();
 		Vector3 nearestPoint = currentPosition;
 		float shortestDistance = float.MaxValue;
 
@@ -136,18 +147,19 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		int eventMinutes = scheduleEvent.time.hour * 60 + scheduleEvent.time.minute;
 		int availableMinutes = eventMinutes - currentMinutes;
 
-		if (availableMinutes * 60 < travelTimeInSeconds) {
+		if (availableMinutes * 60 >= travelTimeInSeconds) {
+			navAgent.speed = walkingSpeed;
+		}
+		else {
 			float maxLatenessInSeconds = maxAcceptableLateness * 60;
 			float runTravelTimeInSeconds = distance / runningSpeed;
+
 			if (availableMinutes * 60 + maxLatenessInSeconds >= runTravelTimeInSeconds) {
 				navAgent.speed = runningSpeed;
 			}
 			else {
 				Debug.LogError($"NPC {student.name} does not have enough time to walk or run to the next event.");
 			}
-		}
-		else {
-			navAgent.speed = walkingSpeed;
 		}
 	}
 
