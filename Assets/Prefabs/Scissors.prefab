@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1667160995400858599}
   - component: {fileID: 4919367648882142317}
+  - component: {fileID: 58074186454520028}
   m_Layer: 0
   m_Name: Scissors
   m_TagString: Untagged
@@ -109,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 2047205693126173021}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.00638208, y: -0.0067350753, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -144,6 +145,21 @@ CapsuleCollider:
   m_Height: 0.21
   m_Direction: 1
   m_Center: {x: 0.01, y: 0, z: 0}
+--- !u!114 &58074186454520028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2047205693126173021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ce91d4b0482bb74c9b7a0de4b6c4455, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: 245fac898f95e3145a8ec4afbfb1e731, type: 2}
+  itemPromptPrefab: {fileID: 5622959630812775553, guid: 33be84b1c293f34439381414b29910f8,
+    type: 3}
 --- !u!1 &3367302620261773538
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class InventoryManager : MonoBehaviour {
 			//Set the static instance to this instance
 			Instance = this;
 		}
+
+		Debug.Log($"Inventory initialized with {tools.Length} slots.");
 	}
 
 	[Header("Tools")]
@@ -70,7 +72,7 @@ public class InventoryManager : MonoBehaviour {
 			equippedTool = toolToEquip;
 
 			//Change the Inventory Slot to the Hand's
-			tools[slotIndex] = null;	
+			tools[slotIndex] = null;
 
 			// equip the tool
 			equipTool(toolToEquip);
@@ -79,7 +81,7 @@ public class InventoryManager : MonoBehaviour {
 			UIManager.Instance.renderInventory();
 		}
 		else {
-			Debug.Log("No tool to equip from inventory!");	
+			Debug.Log("No tool to equip from inventory!");
 		}
 
 	}
@@ -142,9 +144,9 @@ public class InventoryManager : MonoBehaviour {
 		if (equippedTool != null) {
 			Vector3 dropPos = playerHand.position + Vector3.down * 0.5f;
 			GameObject droppedItem = Instantiate(equippedTool.gameModel, dropPos, Quaternion.identity);
-			
+
 			Debug.Log($"Dropped item: {equippedTool.name} at position: {dropPos}");
-			
+
 			Rigidbody rb = droppedItem.AddComponent<Rigidbody>();
 
 			equippedTool = null;
@@ -153,11 +155,32 @@ public class InventoryManager : MonoBehaviour {
 				Destroy(currentToolObject);
 				currentToolObject = null;
 			}
-			
+
 			UIManager.Instance.renderInventory();
 		}
 		else {
 			Debug.Log("No item to drop!");
 		}
+	}
+
+	public void addItemToInventory(ItemData itemToAdd) {
+		Debug.Log($"Trying to add {itemToAdd.name} to inventory");
+
+		for (int i = 0; i < tools.Length; i++) {
+			if (tools[i] == itemToAdd) {
+				Debug.Log($"{itemToAdd.name} is already in the inventory.");
+				return;
+			}
+		}
+
+		for (int i = 0; i < tools.Length; i++) {
+			if (tools[i] == null) {
+				tools[i] = itemToAdd;
+				Debug.Log($"Added {itemToAdd.name} to inventory in slot {i}");
+				UIManager.Instance.renderInventory();
+				return;
+			}
+		}
+		Debug.Log("No empty inventory slot available!");
 	}
 }
