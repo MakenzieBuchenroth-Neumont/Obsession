@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
+using Unity.AI.Navigation;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,11 +11,12 @@ public class DoorPrompt : MonoBehaviour {
 	[SerializeField] Transform doorTransform;
 	[SerializeField] BoxCollider doorBoxCollider;
 	[SerializeField] BoxCollider wallBoxCollider;
-
 	bool doorOpened = false;
 
-	private void OnTriggerStay(Collider other) {
-		if (other.CompareTag("Player")) {
+	private void OnCollisionStay(Collision collision) {
+			if (collision.gameObject.tag.Equals("Player")) {
+			Debug.Log("Player entered door trigger area.");
+
 			Vector3 promptLocation = Camera.main.WorldToScreenPoint(doorTransform.transform.position);
 			doorPrompt.transform.position = promptLocation;
 			doorPrompt.SetActive(true);
@@ -22,18 +24,18 @@ public class DoorPrompt : MonoBehaviour {
 				toggleDoor();
 			}
 		}
-		else if (other.CompareTag("NPC")) {
+		/*else if (other.CompareTag("NPC")) {
 			NavMeshAgent agent = other.GetComponent<NavMeshAgent>();
 			if (agent != null && !doorOpened) {
 				agent.isStopped = true;
 				toggleDoor();
 				StartCoroutine(ResumeAfterDoorOpened(agent));
 			}
-		}
+		}*/
 	}
 
-	private void OnTriggerExit(Collider other) {
-		if (other.CompareTag("Player")) {
+	private void OnCollisionExit(Collision collision) {
+		if (collision.gameObject.tag.Equals("Player")) {
 			doorPrompt.SetActive(false);
 		}
 	}
@@ -49,7 +51,7 @@ public class DoorPrompt : MonoBehaviour {
 			doorTransform.transform.Rotate(Vector3.up, 90);
 			doorBoxCollider.enabled = true;
 			wallBoxCollider.enabled = true;
-			doorOpened = false;	
+			doorOpened = false;
 		}
 	}
 
