@@ -33,22 +33,26 @@ public class ThirdPersonMovement : MonoBehaviour {
 			 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 			controller.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
 
+			animator.SetFloat("Vertical", Input.GetAxis("Vertical"));
+			animator.SetFloat("Horizontal", Input.GetAxis("Horizontal"));
 
 		}
-			animator.SetFloat("Speed", moveDir.magnitude * 0.5f);
+			animator.SetFloat("Vertical", moveDir.magnitude * 0.5f);
 
-		if (Input.GetKeyDown(KeyCode.LeftControl) && !isCrawling) {
+		if (Input.GetKeyDown(KeyCode.C) && !isCrawling) {
 			isCrawling = true;
 			animator.SetBool("isCrawling", true);
 		}
 
-		if (Input.GetKeyDown(KeyCode.LeftControl) && isCrawling) {
+		if (Input.GetKeyDown(KeyCode.C) && isCrawling) {
 			isCrawling = false;
 			animator.SetBool("isCrawling", false);
 		}
 
 		if (Input.GetKey(KeyCode.LeftShift) && !isCrawling) {
 			//moveDir.magnitude * 2;
+			moveSpeed *= 2;
+			animator.SetFloat("Speed", 1);
 			isRunning = true;
 		}
 
