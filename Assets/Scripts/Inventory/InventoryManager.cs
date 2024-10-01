@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour {
@@ -50,21 +51,37 @@ public class InventoryManager : MonoBehaviour {
 	//Equipping
 	//Handles movement of item from Inventory to Hand
 	public void inventoryToHand(int slotIndex) {
+		if (slotIndex < 0 || slotIndex >= tools.Length) {
+			Debug.LogError("Invalid slot index!");
+			return;
+		}
 
 		//Cache the Inventory slot ItemData from InventoryManager
 		ItemData toolToEquip = tools[slotIndex];
 
-		//Change the Inventory Slot to the Hand's
-		tools[slotIndex] = equippedTool;
+		if (toolToEquip != null) {
+			unequipTool();
 
-		//Change the Hand's Slot to the Inventory Slot's
-		equippedTool = toolToEquip;
+			if (equippedTool != null) {
+				unequipTool();
+			}
 
-		//Update the changes to the UI
-		UIManager.Instance.renderInventory();
+			//Change the Hand's Slot to the Inventory Slot's
+			equippedTool = toolToEquip;
 
-		// equip the tool
-		equipTool(toolToEquip);
+			//Change the Inventory Slot to the Hand's
+			tools[slotIndex] = null;	
+
+			// equip the tool
+			equipTool(toolToEquip);
+
+			//Update the changes to the UI
+			UIManager.Instance.renderInventory();
+		}
+		else {
+			Debug.Log("No tool to equip from inventory!");	
+		}
+
 	}
 
 	//Handles movement of item from Hand to Inventory
@@ -87,6 +104,11 @@ public class InventoryManager : MonoBehaviour {
 	private void equipTool(ItemData toolToEquip) {
 		if (currentToolObject != null) {
 			Destroy(currentToolObject);
+		}
+
+		Debug.Log("Current Inventory State:");
+		for (int i = 0; i < tools.Length; i++) {
+			Debug.Log($"Slot {i}: {tools[i]?.name ?? "Empty"}");
 		}
 
 		if (toolToEquip != null && toolToEquip.gameModel != null) {
@@ -112,6 +134,30 @@ public class InventoryManager : MonoBehaviour {
 	private void unequipTool() {
 		if (currentToolObject != null) {
 			Destroy(currentToolObject);
+			currentToolObject = null;
+		}
+	}
+
+	public void dropItem() {
+		if (equippedTool != null) {
+			Vector3 dropPos = playerHand.position + Vector3.down * 0.5f;
+			GameObject droppedItem = Instantiate(equippedTool.gameModel, dropPos, Quaternion.identity);
+			
+			Debug.Log($"Dropped item: {equippedTool.name} at position: {dropPos}");
+			
+			Rigidbody rb = droppedItem.AddComponent<Rigidbody>();
+
+			equippedTool = null;
+
+			if (currentToolObject != null) {
+				Destroy(currentToolObject);
+				currentToolObject = null;
+			}
+			
+			UIManager.Instance.renderInventory();
+		}
+		else {
+			Debug.Log("No item to drop!");
 		}
 	}
 }

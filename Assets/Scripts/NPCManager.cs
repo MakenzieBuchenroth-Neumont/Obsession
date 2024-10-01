@@ -81,12 +81,12 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 			int startMovingMinutes = eventMinutes - (int)travelTimeInMinutes;
 
 			// Log details for debugging
-			Debug.Log($"NPC {student.name} should start moving to event '{scheduleEvent.name}'");
+			/*Debug.Log($"NPC {student.name} should start moving to event '{scheduleEvent.name}'");
 			Debug.Log($"Current Time: {currentTime.hour}:{currentTime.minute}");
 			Debug.Log($"Event Time: {scheduleEvent.time.hour}:{scheduleEvent.time.minute}");
 			Debug.Log($"Distance: {distance} units, Travel Time: {travelTimeInMinutes} minutes");
 			Debug.Log($"Start Moving Time: {startMovingMinutes / 60}:{startMovingMinutes % 60}");
-
+			*/
 			if (currentMinutes >= startMovingMinutes) {
 				return true;
 			}
@@ -110,7 +110,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 			npcInstance.transform.eulerAngles = scheduleEvent.facing;
 		}
 		else {
-			Debug.Log("$\"NPC {student.name} cannot start moving yet. Waiting for the event time.\");");
+			//Debug.Log("$\"NPC {student.name} cannot start moving yet. Waiting for the event time.\");");
 		}
 	}
 
