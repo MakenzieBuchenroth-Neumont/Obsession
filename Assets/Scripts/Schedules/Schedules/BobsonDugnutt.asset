@@ -25,6 +25,17 @@ MonoBehaviour:
     factorDate: 0
     coord: {x: 14.29, y: 0.25, z: -6.49}
     facing: {x: 0, y: -90, z: 0}
+  - name: Head to Class
+    time:
+      day: 0
+      hour: 8
+      minute: 15
+    dayOfTheWeek: 1
+    priority: 0
+    ignoreDayOfTheWeek: 1
+    factorDate: 0
+    coord: {x: 0.2, y: 0.25, z: -6.409}
+    facing: {x: 0, y: 0, z: 0}
   - name: Arrive at Class
     time:
       day: 0
