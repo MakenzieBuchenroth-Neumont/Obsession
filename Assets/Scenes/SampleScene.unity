@@ -409,6 +409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 120535760}
+  - component: {fileID: 120535761}
   m_Layer: 0
   m_Name: 8am
   m_TagString: Untagged
@@ -431,6 +432,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1192970534}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &120535761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 120535759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec6df72d4d535d4f8ac5b441a6655f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neighbors: []
 --- !u!1001 &195079460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1279,7 +1293,7 @@ MonoBehaviour:
     day: 0
     hour: 0
     minute: 0
-  timeScale: 0.25
+  timeScale: 2
   sunTransform: {fileID: 410087041}
 --- !u!114 &466935325
 MonoBehaviour:
@@ -1500,6 +1514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 668972102}
+  - component: {fileID: 668972103}
   m_Layer: 0
   m_Name: 8:30am
   m_TagString: Untagged
@@ -1522,6 +1537,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1192970534}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &668972103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668972101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ec6df72d4d535d4f8ac5b441a6655f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neighbors: []
 --- !u!4 &722034665 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 215049db47cc92c4c9e8c2ba78cb78de,
@@ -4118,6 +4146,7 @@ GameObject:
   - component: {fileID: 1831538519}
   - component: {fileID: 1831538521}
   - component: {fileID: 1831538522}
+  - component: {fileID: 1831538523}
   m_Layer: 0
   m_Name: NavMesh
   m_TagString: Untagged
@@ -4211,6 +4240,22 @@ MonoBehaviour:
   m_Bidirectional: 1
   m_AutoUpdatePosition: 0
   m_Area: 0
+--- !u!208 &1831538523
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831538518}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.425, y: 1.2, z: 0.6}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -1.26, y: -2.12, z: 6.8}
+  m_TimeToStationary: 0.5
 --- !u!1 &1872275638
 GameObject:
   m_ObjectHideFlags: 0

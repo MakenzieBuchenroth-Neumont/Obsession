@@ -26,7 +26,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 				GameObject npcInstance = Instantiate(schedule.student.prefab);
 				npcInstance.transform.position = schedule.student.spawnPoint;
 				npcInstances[schedule.student] = npcInstance;
-				
+
 				var navAgent = npcInstance.GetComponent<NavMeshAgent>();
 				if (navAgent == null) {
 					navAgent = npcInstance.AddComponent<NavMeshAgent>();
@@ -86,7 +86,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 			Debug.Log($"Distance: {distance} units, Travel Time: {travelTimeInMinutes} minutes");
 			Debug.Log($"Start Moving Time: {startMovingMinutes / 60}:{startMovingMinutes % 60}");
 
-			if (currentMinutes >= startMovingMinutes - 3) {
+			if (currentMinutes >= startMovingMinutes - 10) {
 				return true;
 			}
 		}
