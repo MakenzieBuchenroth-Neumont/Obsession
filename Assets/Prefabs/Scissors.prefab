@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 74198567108881375}
   - component: {fileID: 3547159011242627010}
   - component: {fileID: 5375852096819552860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: blade2_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1667160995400858599}
   - component: {fileID: 4919367648882142317}
   - component: {fileID: 58074186454520028}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Scissors
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   - component: {fileID: 5510021259608497506}
   - component: {fileID: 9022657056263692387}
   - component: {fileID: 7385376083220542554}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: blade1_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 839500877809481964}
   - component: {fileID: 8873157889233742469}
   - component: {fileID: 1417174103988468901}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: screw1_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 5836487947620081871}
   - component: {fileID: 5557042239420613751}
   - component: {fileID: 4646554712373449714}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ring2_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 731655089917482849}
   - component: {fileID: 1521422283263458075}
   - component: {fileID: 7224504061088299885}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: screw2_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -503,7 +503,7 @@ GameObject:
   - component: {fileID: 873615659804471940}
   - component: {fileID: 2204275898118518317}
   - component: {fileID: 6066145344507941223}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ring1_low
   m_TagString: Untagged
   m_Icon: {fileID: 0}

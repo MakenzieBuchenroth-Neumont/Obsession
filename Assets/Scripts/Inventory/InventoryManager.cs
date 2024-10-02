@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
@@ -62,11 +63,15 @@ public class InventoryManager : MonoBehaviour {
 		ItemData toolToEquip = tools[slotIndex];
 
 		if (toolToEquip != null) {
-			unequipTool();
-
 			if (equippedTool != null) {
-				unequipTool();
+				for (int i = 0; i < tools.Length; i++) {
+					if (tools[i] == null) {
+						tools[i] = equippedTool;
+						equippedTool = null;
+						break;
+				}
 			}
+		}
 
 			//Change the Hand's Slot to the Inventory Slot's
 			equippedTool = toolToEquip;
@@ -88,18 +93,23 @@ public class InventoryManager : MonoBehaviour {
 
 	//Handles movement of item from Hand to Inventory
 	public void handToInventory() {
-		//Iterate through each inventory slot and find an empty slot
+		if (equippedTool == null) {
+			Debug.Log("No tool is equipped.");
+			return;
+		}
 		for (int i = 0; i < tools.Length; i++) {
 			if (tools[i] == null) {
-				//Send the equipped item over to its new slot
 				tools[i] = equippedTool;
-				//Remove the item from the hand
-				equippedTool = null;
 				unequipTool();
+				equippedTool = null;
+				Debug.Log($"Moved {tools[i].name} to inventory slot {i}.");
 				break;
 			}
 		}
-		//Update changes in the inventory
+
+		if (equippedTool != null) {
+			Debug.Log("No empty inventory slot!");
+		}
 		UIManager.Instance.renderInventory();
 	}
 
@@ -129,7 +139,6 @@ public class InventoryManager : MonoBehaviour {
 			if (toolRotations.TryGetValue(toolToEquip.name, out Quaternion rotation)) {
 				currentToolObject.transform.localRotation = rotation;
 			}
-
 		}
 	}
 
@@ -163,24 +172,58 @@ public class InventoryManager : MonoBehaviour {
 		}
 	}
 
-	public void addItemToInventory(ItemData itemToAdd) {
-		Debug.Log($"Trying to add {itemToAdd.name} to inventory");
+	//public void addItemToInventory(ItemData itemToAdd) {
+	//	Debug.Log($"Trying to add {itemToAdd.name} to inventory");
 
-		for (int i = 0; i < tools.Length; i++) {
-			if (tools[i] == itemToAdd) {
-				Debug.Log($"{itemToAdd.name} is already in the inventory.");
-				return;
-			}
-		}
+	//	for (int i = 0; i < tools.Length; i++) {
+	//		if (tools[i] == itemToAdd) {
+	//			Debug.Log($"{itemToAdd.name} is already in the inventory.");
+	//			return;
+	//		}
+	//	}
 
+	//	for (int i = 0; i < tools.Length; i++) {
+	//		if (tools[i] == null) {
+	//			tools[i] = itemToAdd;
+	//			Debug.Log($"Added {itemToAdd.name} to inventory in slot {i}");
+	//			UIManager.Instance.renderInventory();
+	//			return;
+	//		}
+	//	}
+	//	Debug.Log("No empty inventory slot available!");
+	//}
+
+	public bool isInventoryFull() {
 		for (int i = 0; i < tools.Length; i++) {
 			if (tools[i] == null) {
-				tools[i] = itemToAdd;
-				Debug.Log($"Added {itemToAdd.name} to inventory in slot {i}");
-				UIManager.Instance.renderInventory();
-				return;
+				return false;
 			}
 		}
-		Debug.Log("No empty inventory slot available!");
+			return true;
+		}
+
+		public bool tryAddToInventory(ItemData item) {
+			for (int i = 0; i < tools.Length; i++) {
+				if (tools[i] == item) {
+					Debug.Log($"{item.name} is already in inventory!");
+					return false;
+				}
+			}
+
+			for (int i = 0; i < tools.Length; i++) {
+				if (tools[i] == null) {
+					tools[i] = item;
+					Debug.Log($"Added {item.name} to inventory");
+					UIManager.Instance.renderInventory();
+					return true;
+				}
+			}
+
+			Debug.Log("No empty inventory slot!");
+			return false;
+		}
+
+	public bool isHandFull() {
+		return equippedItem != null;
 	}
 }
