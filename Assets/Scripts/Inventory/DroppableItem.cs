@@ -7,24 +7,13 @@ public class DroppableItem : MonoBehaviour {
 	[SerializeField] public ItemData itemData;
 
 	public void pickupItem() {
-		if (!InventoryManager.Instance.isInventoryFull() && !InventoryManager.Instance.isHandFull()) {
-			bool added = InventoryManager.Instance.tryAddToInventory(itemData);
-
-			if (added) {
-				Debug.Log($"{itemData.name} added to inventory.");
-				Destroy(gameObject);
-			}
-			else {
-				Debug.Log("Failed to add item.");
-			}
+		if (InventoryManager.Instance.isInventoryFull() && InventoryManager.Instance.isHandFull()) {
+			Debug.Log($"Hand and inventory are full.");
+			return;
 		}
-		else {
-			if (InventoryManager.Instance.isInventoryFull()) {
-				Debug.Log("Inventory is full.");
-			}
-			if (InventoryManager.Instance.isHandFull()) {
-				Debug.Log("Hand is full.");
-			}
+
+		if (InventoryManager.Instance.tryAddToInventory(itemData)) {
+			Destroy(gameObject);
 		}
 	}
 

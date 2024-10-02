@@ -548,10 +548,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4585764086087866501, guid: 4c46fc04716ca9c459a42b2be9aa83f1,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 862206111}
-    - targetCorrespondingSourceObject: {fileID: 4585764086087866501, guid: 4c46fc04716ca9c459a42b2be9aa83f1,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 862206110}
     - targetCorrespondingSourceObject: {fileID: 4585764086087866501, guid: 4c46fc04716ca9c459a42b2be9aa83f1,
         type: 3}
@@ -560,11 +556,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4585764086087866501, guid: 4c46fc04716ca9c459a42b2be9aa83f1,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 862206113}
+      addedObject: {fileID: 862206114}
     - targetCorrespondingSourceObject: {fileID: 4585764086087866501, guid: 4c46fc04716ca9c459a42b2be9aa83f1,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 862206114}
+      addedObject: {fileID: 862206111}
+    - targetCorrespondingSourceObject: {fileID: 4585764086087866501, guid: 4c46fc04716ca9c459a42b2be9aa83f1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 862206113}
   m_SourcePrefab: {fileID: 100100000, guid: 4c46fc04716ca9c459a42b2be9aa83f1, type: 3}
 --- !u!1001 &258641058
 PrefabInstance:

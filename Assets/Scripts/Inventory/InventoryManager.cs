@@ -57,60 +57,47 @@ public class InventoryManager : MonoBehaviour {
 		if (slotIndex < 0 || slotIndex >= tools.Length) {
 			Debug.LogError("Invalid slot index!");
 			return;
-		}
-
-		//Cache the Inventory slot ItemData from InventoryManager
+		}	
 		ItemData toolToEquip = tools[slotIndex];
 
 		if (toolToEquip != null) {
-			if (equippedTool != null) {
-				for (int i = 0; i < tools.Length; i++) {
-					if (tools[i] == null) {
-						tools[i] = equippedTool;
-						equippedTool = null;
-						break;
-				}
-			}
-		}
+			handToInventory();
 
-			//Change the Hand's Slot to the Inventory Slot's
 			equippedTool = toolToEquip;
-
-			//Change the Inventory Slot to the Hand's
 			tools[slotIndex] = null;
 
-			// equip the tool
 			equipTool(toolToEquip);
-
-			//Update the changes to the UI
 			UIManager.Instance.renderInventory();
 		}
 		else {
 			Debug.Log("No tool to equip from inventory!");
 		}
-
 	}
 
-	//Handles movement of item from Hand to Inventory
-	public void handToInventory() {
-		if (equippedTool == null) {
-			Debug.Log("No tool is equipped.");
-			return;
-		}
-		for (int i = 0; i < tools.Length; i++) {
-			if (tools[i] == null) {
-				tools[i] = equippedTool;
-				unequipTool();
-				equippedTool = null;
-				Debug.Log($"Moved {tools[i].name} to inventory slot {i}.");
-				break;
+	public void handleEquippedTool() {
+		if (equippedTool != null) {
+			if (isInventoryFull()) {
+				Debug.Log("Inventory is full. Dropping the item in hand.");
+				dropHeldItem();
+			}
+			else {
+				Debug.Log("Moving held item to inventory.");
+				handToInventory();
 			}
 		}
+	}
 
+	private void dropHeldItem() {
 		if (equippedTool != null) {
-			Debug.Log("No empty inventory slot!");
+			GameObject droppedObject = Instantiate(equippedTool.gameModel, playerHand.position, Quaternion.identity);
+			droppedObject.AddComponent<Rigidbody>();
+
+			equippedTool = null;
+			unequipTool();
+
+			UIManager.Instance.renderInventory();
+			Debug.Log($"Dropped {droppedObject.name} into the game world.");
 		}
-		UIManager.Instance.renderInventory();
 	}
 
 	private void equipTool(ItemData toolToEquip) {
@@ -118,27 +105,10 @@ public class InventoryManager : MonoBehaviour {
 			Destroy(currentToolObject);
 		}
 
-		Debug.Log("Current Inventory State:");
-		for (int i = 0; i < tools.Length; i++) {
-			Debug.Log($"Slot {i}: {tools[i]?.name ?? "Empty"}");
-		}
-
 		if (toolToEquip != null && toolToEquip.gameModel != null) {
-			// Instantiate the tool and parent it to the player's hand
 			currentToolObject = Instantiate(toolToEquip.gameModel, playerHand);
-
-			// Reset position and rotation
-			currentToolObject.transform.localPosition = Vector3.zero;
-			currentToolObject.transform.localRotation = Quaternion.identity;
-
-			// Apply specific position and rotation if defined
-			if (toolPositions.TryGetValue(toolToEquip.name, out Vector3 position)) {
-				currentToolObject.transform.localPosition = position;
-			}
-
-			if (toolRotations.TryGetValue(toolToEquip.name, out Quaternion rotation)) {
-				currentToolObject.transform.localRotation = rotation;
-			}
+			currentToolObject.transform.localPosition = toolPositions.TryGetValue(toolToEquip.name, out Vector3 position) ? position : Vector3.zero;
+			currentToolObject.transform.localRotation = toolRotations.TryGetValue(toolToEquip.name, out Quaternion rotation) ? rotation : Quaternion.identity;
 		}
 	}
 
@@ -153,77 +123,74 @@ public class InventoryManager : MonoBehaviour {
 		if (equippedTool != null) {
 			Vector3 dropPos = playerHand.position + Vector3.down * 0.5f;
 			GameObject droppedItem = Instantiate(equippedTool.gameModel, dropPos, Quaternion.identity);
-
-			Debug.Log($"Dropped item: {equippedTool.name} at position: {dropPos}");
-
-			Rigidbody rb = droppedItem.AddComponent<Rigidbody>();
+			droppedItem.AddComponent<Rigidbody>();
 
 			equippedTool = null;
-
-			if (currentToolObject != null) {
-				Destroy(currentToolObject);
-				currentToolObject = null;
-			}
-
+			unequipTool();
 			UIManager.Instance.renderInventory();
+			Debug.Log($"Dropped item: {droppedItem.name} at position {dropPos}.");
 		}
 		else {
 			Debug.Log("No item to drop!");
 		}
 	}
 
-	//public void addItemToInventory(ItemData itemToAdd) {
-	//	Debug.Log($"Trying to add {itemToAdd.name} to inventory");
-
-	//	for (int i = 0; i < tools.Length; i++) {
-	//		if (tools[i] == itemToAdd) {
-	//			Debug.Log($"{itemToAdd.name} is already in the inventory.");
-	//			return;
-	//		}
-	//	}
-
-	//	for (int i = 0; i < tools.Length; i++) {
-	//		if (tools[i] == null) {
-	//			tools[i] = itemToAdd;
-	//			Debug.Log($"Added {itemToAdd.name} to inventory in slot {i}");
-	//			UIManager.Instance.renderInventory();
-	//			return;
-	//		}
-	//	}
-	//	Debug.Log("No empty inventory slot available!");
-	//}
-
 	public bool isInventoryFull() {
-		for (int i = 0; i < tools.Length; i++) {
-			if (tools[i] == null) {
-				return false;
-			}
+		foreach (var tool in tools) {
+			if (tool == null) return false;
 		}
-			return true;
-		}
+		return true;
+	}
 
-		public bool tryAddToInventory(ItemData item) {
-			for (int i = 0; i < tools.Length; i++) {
-				if (tools[i] == item) {
-					Debug.Log($"{item.name} is already in inventory!");
-					return false;
-				}
-			}
+	public bool isHandFull() {
+		return equippedTool != null;
+	}
 
-			for (int i = 0; i < tools.Length; i++) {
-				if (tools[i] == null) {
-					tools[i] = item;
-					Debug.Log($"Added {item.name} to inventory");
-					UIManager.Instance.renderInventory();
-					return true;
-				}
-			}
-
-			Debug.Log("No empty inventory slot!");
+	public bool tryAddToInventory(ItemData item) {
+		if (System.Array.Exists(tools, tool => tool == item)) {
+			Debug.Log($"{item.name} is already in inventory!");
 			return false;
 		}
 
-	public bool isHandFull() {
-		return equippedItem != null;
+		for (int i = 0; i < tools.Length; i++) {
+			if (tools[i] == null) {
+				tools[i] = item;
+				Debug.Log($"Added {item.name} to inventory.");
+				UIManager.Instance.renderInventory();
+				return true;
+			}
+		}
+		Debug.Log("No empty inventory slot!");
+		return false;
+	}
+
+	public void equipItemToHand(ItemData item) {
+		if (equippedTool != null) {
+			Debug.Log("Hand already has an item!");
+			return;	
+		}
+
+		equippedTool = item;
+		equipTool(item);
+		Debug.Log("Item equipped to hand.");
+	}
+
+	public void handToInventory() {
+		if (equippedTool == null) {
+			Debug.Log("No tool is equipped.");
+			return;
+		}
+
+		for (int i = 0; i < tools.Length; i++) {
+			if (tools[i] == null) {
+				tools[i] = equippedTool;
+				equippedTool = null;
+				unequipTool();
+				Debug.Log($"Moved {tools[i].name} to inventory slot {i}.");
+				UIManager.Instance.renderInventory();
+				return;
+			}
+		}
+		dropHeldItem();
 	}
 }
