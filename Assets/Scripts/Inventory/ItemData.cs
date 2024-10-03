@@ -13,4 +13,6 @@ public class ItemData : ScriptableObject {
 	public GameObject gameModel;
 
 	public new string name;
+
+	public bool isWeapon;
 }

@@ -17,4 +17,5 @@ MonoBehaviour:
   gameModel: {fileID: 1671221402494773858, guid: 98da212a627f5df4ca8d4771871edf90,
     type: 3}
   name: BaseballBat
+  isWeapon: 1
   equipmentType: 2

@@ -17,4 +17,5 @@ MonoBehaviour:
   gameModel: {fileID: 3100519388199447950, guid: cc4f80c9199a8a54e9d9c15297f2a66a,
     type: 3}
   name: Knife
+  isWeapon: 1
   equipmentType: 0

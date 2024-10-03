@@ -17,7 +17,7 @@ public class DoorPrompt : MonoBehaviour {
 			if (collision.gameObject.tag.Equals("Player")) {
 			Debug.Log("Player entered door trigger area.");
 
-			Vector3 promptLocation = Camera.main.WorldToScreenPoint(doorTransform.transform.position);
+			Vector3 promptLocation = Camera.main.WorldToScreenPoint(doorTransform.transform.position) * 1;
 			doorPrompt.transform.position = promptLocation;
 			doorPrompt.SetActive(true);
 			if (Input.GetKeyDown(KeyCode.F)) {

@@ -77,7 +77,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 
 			int currentMinutes = currentTime.hour * 60 + currentTime.minute;
 			int eventMinutes = scheduleEvent.time.hour * 60 + scheduleEvent.time.minute;
-			
+
 			int startMovingMinutes = eventMinutes - (int)travelTimeInMinutes;
 
 			// Log details for debugging
@@ -112,6 +112,45 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		else {
 			//Debug.Log("$\"NPC {student.name} cannot start moving yet. Waiting for the event time.\");");
 		}
+	}
+
+	public void handleWeaponPickup(GameObject weapon) {
+		foreach (var kvp in npcInstances) {
+			Student student = kvp.Key;
+			GameObject npcInstance = kvp.Value;
+			NavMeshAgent navAgent = npcInstance.GetComponent<NavMeshAgent>();
+
+			if (navAgent.isActiveAndEnabled) {
+				navAgent.isStopped = true;
+				Vector3 targetClassroom = findNearestClassroom(npcInstance.transform.position);
+
+				navAgent.SetDestination(targetClassroom);
+				navAgent.speed = runningSpeed;
+				Debug.Log($"{student.name} picked up {weapon.name} and is heading to a classroom.");
+
+
+				Destroy(weapon);
+				break;
+			}
+		}
+	}
+
+	public Vector3 findNearestClassroom(Vector3 npcPosition) {
+		Collider[] classrooms = Physics.OverlapSphere(npcPosition, 100f);
+		GameObject nearestClassroom = null;
+		float closestDistance = Mathf.Infinity;
+
+		foreach (Collider collider in classrooms) {
+			if (collider.CompareTag("Classroom")) {
+				Vector3 classroomPosition = collider.transform.position;
+				float distance = Vector3.Distance(npcPosition, classroomPosition);
+				if (distance < closestDistance) {
+					closestDistance = distance;
+					nearestClassroom = collider.gameObject;
+				}
+			}
+		}
+		return nearestClassroom != null ? nearestClassroom.transform.position : npcPosition;
 	}
 
 	private void OnDestroy() {
