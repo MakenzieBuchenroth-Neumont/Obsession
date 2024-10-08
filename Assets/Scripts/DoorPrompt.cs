@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Transactions;
 using Unity.AI.Navigation;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.AI;
@@ -24,14 +25,14 @@ public class DoorPrompt : MonoBehaviour {
 				toggleDoor();
 			}
 		}
-		/*else if (other.CompareTag("NPC")) {
-			NavMeshAgent agent = other.GetComponent<NavMeshAgent>();
+		else if (collision.gameObject.tag.Equals("NPC")) {
+			NavMeshAgent agent = collision.gameObject.GetComponent<NavMeshAgent>();
 			if (agent != null && !doorOpened) {
 				agent.isStopped = true;
 				toggleDoor();
 				StartCoroutine(ResumeAfterDoorOpened(agent));
 			}
-		}*/
+		}
 	}
 
 	private void OnCollisionExit(Collision collision) {
@@ -41,22 +42,25 @@ public class DoorPrompt : MonoBehaviour {
 	}
 
 	private void toggleDoor() {
-		if (doorOpened == false) {
+		doorOpened = !doorOpened;
+		if (doorOpened) {
 			doorTransform.transform.Rotate(Vector3.up, -90);
-			doorBoxCollider.enabled = false;
-			wallBoxCollider.enabled = false;
-			doorOpened = true;
-		}
-		else if (doorOpened == true) {
-			doorTransform.transform.Rotate(Vector3.up, 90);
 			doorBoxCollider.enabled = true;
 			wallBoxCollider.enabled = true;
-			doorOpened = false;
+			Debug.Log("doorBoxCollider.enabled: " + doorBoxCollider.enabled);
+			Debug.Log("wallBoxCollider.enabled: " + wallBoxCollider.enabled);
+		}
+		else {
+			doorTransform.transform.Rotate(Vector3.up, 90);
+			doorBoxCollider.enabled = false;
+			wallBoxCollider.enabled = false;
+			Debug.Log("doorBoxCollider.enabled: " + doorBoxCollider.enabled);
+			Debug.Log("wallBoxCollider.enabled: " + wallBoxCollider.enabled);
 		}
 	}
 
 	private IEnumerator ResumeAfterDoorOpened(NavMeshAgent agent) {
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(3f);
 		agent.isStopped = false;
 	}
 }

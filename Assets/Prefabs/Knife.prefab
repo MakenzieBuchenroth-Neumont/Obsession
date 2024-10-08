@@ -157,7 +157,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -178,5 +178,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData: {fileID: 11400000, guid: c16b80673b036c845acdbd4fd9c52f5b, type: 2}
-  itemPromptPrefab: {fileID: 5622959630812775553, guid: 33be84b1c293f34439381414b29910f8,
-    type: 3}

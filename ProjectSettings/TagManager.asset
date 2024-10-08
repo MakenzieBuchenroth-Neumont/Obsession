@@ -8,6 +8,8 @@ TagManager:
   - MBS:Wall
   - Door
   - NPC
+  - Classroom
+  - Bed
   layers:
   - Default
   - TransparentFX

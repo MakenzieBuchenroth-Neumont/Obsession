@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 
@@ -43,6 +44,10 @@ public class GameTimestamp {
 			//Reset hours 
 			hour = 0;
 			day++;
+		}
+
+		if (hour == 18) {
+			SceneManager.LoadScene("Bedroom");
 		}
 	}
 

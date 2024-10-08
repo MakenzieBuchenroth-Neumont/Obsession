@@ -13,6 +13,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 	private Dictionary<Student, GameObject> npcInstances = new Dictionary<Student, GameObject>();
 	private Dictionary<Student, Vector3> npcDestinations = new Dictionary<Student, Vector3>();
 	private Dictionary<Student, float> npcSpeeds = new Dictionary<Student, float>();
+	private Dictionary<Student, bool> isWeaponPickupInProgress = new Dictionary<Student, bool>();
 
 	public float walkingSpeed = 1f;
 	public float runningSpeed = 3f;
@@ -32,6 +33,8 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 					navAgent = npcInstance.AddComponent<NavMeshAgent>();
 				}
 				navAgent.speed = walkingSpeed;
+
+				isWeaponPickupInProgress[schedule.student] = false;
 			}
 		}
 	}
@@ -80,13 +83,6 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 
 			int startMovingMinutes = eventMinutes - (int)travelTimeInMinutes;
 
-			// Log details for debugging
-			/*Debug.Log($"NPC {student.name} should start moving to event '{scheduleEvent.name}'");
-			Debug.Log($"Current Time: {currentTime.hour}:{currentTime.minute}");
-			Debug.Log($"Event Time: {scheduleEvent.time.hour}:{scheduleEvent.time.minute}");
-			Debug.Log($"Distance: {distance} units, Travel Time: {travelTimeInMinutes} minutes");
-			Debug.Log($"Start Moving Time: {startMovingMinutes / 60}:{startMovingMinutes % 60}");
-			*/
 			if (currentMinutes >= startMovingMinutes) {
 				return true;
 			}
@@ -115,42 +111,60 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 	}
 
 	public void handleWeaponPickup(GameObject weapon) {
-		foreach (var kvp in npcInstances) {
-			Student student = kvp.Key;
-			GameObject npcInstance = kvp.Value;
-			NavMeshAgent navAgent = npcInstance.GetComponent<NavMeshAgent>();
-
-			if (navAgent.isActiveAndEnabled) {
-				navAgent.isStopped = true;
-				Vector3 targetClassroom = findNearestClassroom(npcInstance.transform.position);
-
-				navAgent.SetDestination(targetClassroom);
-				navAgent.speed = runningSpeed;
-				Debug.Log($"{student.name} picked up {weapon.name} and is heading to a classroom.");
-
-
-				Destroy(weapon);
-				break;
+		foreach (var npc in npcInstances) {
+			if (!isWeaponPickupInProgress[npc.Key]) {
+				if (!npcDestinations.ContainsKey(npc.Key)) {
+					isWeaponPickupInProgress[npc.Key] = true;
+					StartCoroutine(PickupAndDeliverWeapon(npc.Key, weapon));
+					break;
+				}
 			}
 		}
 	}
 
-	public Vector3 findNearestClassroom(Vector3 npcPosition) {
-		Collider[] classrooms = Physics.OverlapSphere(npcPosition, 100f);
-		GameObject nearestClassroom = null;
-		float closestDistance = Mathf.Infinity;
+	private IEnumerator PickupAndDeliverWeapon(Student student, GameObject weapon) {
+		GameObject npcInstance = npcInstances[student];
+		NavMeshAgent navAgent = npcInstance.GetComponent<NavMeshAgent>();
 
-		foreach (Collider collider in classrooms) {
-			if (collider.CompareTag("Classroom")) {
-				Vector3 classroomPosition = collider.transform.position;
-				float distance = Vector3.Distance(npcPosition, classroomPosition);
-				if (distance < closestDistance) {
-					closestDistance = distance;
-					nearestClassroom = collider.gameObject;
-				}
+		navAgent.ResetPath();
+
+		while (navAgent.remainingDistance > 0.1f || navAgent.pathPending) {
+			yield return null;
+		}
+
+		Debug.Log($"{student.name} picked up the weapon {weapon.name}.");
+		Destroy(weapon); // Destroy or remove the weapon from the ground
+
+		GameObject nearestClassroom = findNearestClassroom(npcInstance.transform.position);
+		if (nearestClassroom != null) {
+			// Route through the nearest door if applicable
+			navAgent.SetDestination(nearestClassroom.transform.position);
+
+			// Wait until NPC reaches the door
+			while (navAgent.remainingDistance > 0.1f || navAgent.pathPending) {
+				yield return null;
 			}
 		}
-		return nearestClassroom != null ? nearestClassroom.transform.position : npcPosition;
+
+		Debug.Log($"{student.name} delivered the weapon to the classroom.");
+		// Reset weapon pickup state and resume normal schedule
+		isWeaponPickupInProgress[student] = false;
+	}
+
+	public GameObject findNearestClassroom(Vector3 npcPosition) {
+		GameObject[] classrooms = GameObject.FindGameObjectsWithTag("Classroom");
+		GameObject nearestClassroom = null;
+		float minDistance = Mathf.Infinity;
+
+		foreach (GameObject classroom in classrooms) {
+			float distance = Vector3.Distance(npcPosition, classroom.transform.position);
+			if (distance < minDistance) {
+				minDistance = distance;
+				nearestClassroom = classroom;
+			}
+		}
+		
+		return nearestClassroom;
 	}
 
 	private void OnDestroy() {

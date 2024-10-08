@@ -10,6 +10,10 @@ public class WeaponDetection : MonoBehaviour {
 	// Start is called before the first frame update
 	void Start() {
 		npcManager = FindObjectOfType<NPCManager>();
+
+		if (npcManager == null) {
+			Debug.LogError("No NPC Manager found!");
+		}
 	}
 
 	// Update is called once per frame

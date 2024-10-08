@@ -21,7 +21,10 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: mat_hair_tied.001 - ponytail
-  m_Shader: {fileID: -6465566751694194690, guid: 7e0b5bad5c3d5464fa13085f40bcdbdb, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 7e0b5bad5c3d5464fa13085f40bcdbdb,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _ENVIRONMENTREFLECTIONS_OFF
@@ -34,6 +37,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -143,14 +147,14 @@ Material:
     - _BlackTone: {r: 0.20379585, g: 0.18903527, b: 0.22641507, a: 0}
     - _Color: {r: 0.9056604, g: 0.9056604, b: 0.9056604, a: 1}
     - _Color_A: {r: 1, g: 1, b: 1, a: 0}
-    - _Color_A_1: {r: 0.20754719, g: 0.20754719, b: 0.20754719, a: 1}
-    - _Color_A_2: {r: 0.31132078, g: 0.27414072, b: 0.26286048, a: 1}
+    - _Color_A_1: {r: 0.7987421, g: 0.7834775, b: 0.5249594, a: 1}
+    - _Color_A_2: {r: 0.61635214, g: 0.60272926, b: 0.37795174, a: 1}
     - _Color_B: {r: 0.42938215, g: 0.5660378, b: 0.36578855, a: 0}
-    - _Color_B_1: {r: 0.1981132, g: 0.032707363, b: 0.032707363, a: 1}
+    - _Color_B_1: {r: 0.19811317, g: 0.032707363, b: 0.032707363, a: 1}
     - _Color_B_2: {r: 1, g: 0.25, b: 0.25, a: 1}
     - _Color_C: {r: 0.15454787, g: 0.1634669, b: 0.21698111, a: 0}
     - _Color_C_1: {r: 0, g: 0, b: 0, a: 0}
-    - _Color_C_2: {r: 0, g: 0, b: 0, a: 0}
+    - _Color_C_2: {r: 0.19496846, g: 0.19496846, b: 0.19496846, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _MaskRemap: {r: 0.5, g: 1, b: 0, a: 0}
     - _Outline_Color: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
