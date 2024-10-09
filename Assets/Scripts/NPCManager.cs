@@ -9,6 +9,7 @@ using UnityEngine.AI;
 using static UnityEngine.Rendering.VolumeComponent;
 
 public class NPCManager : MonoBehaviour, ITimeTracker {
+
 	public List<NPCScheduleData> npcSchedules;
 	private Dictionary<Student, GameObject> npcInstances = new Dictionary<Student, GameObject>();
 	private Dictionary<Student, Vector3> npcDestinations = new Dictionary<Student, Vector3>();
