@@ -10,6 +10,7 @@ TagManager:
   - NPC
   - Classroom
   - Bed
+  - DialogueBox
   layers:
   - Default
   - TransparentFX

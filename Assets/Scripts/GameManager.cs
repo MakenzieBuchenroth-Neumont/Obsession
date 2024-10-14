@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour {
 				case GameMode.Game:
 					break;
 				case GameMode.GameOver:
-					SceneManager.LoadScene("Title");
+					SceneManager.LoadSceneAsync("Title");
 					gameMode = GameMode.Title;
 					break;
 				default:
@@ -146,7 +146,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void newGameButton() {
-		SceneManager.LoadScene("FirstFloor");
+		SceneManager.LoadSceneAsync("FirstFloor");
 		gameMode = GameMode.Start;
 	}
 

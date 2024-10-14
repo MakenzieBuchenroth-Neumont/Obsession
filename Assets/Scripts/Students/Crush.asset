@@ -15,7 +15,17 @@ MonoBehaviour:
   studentName: Crush
   year: 4
   personality: 0
-  Class: 13
+  studentClass: 12
   studentImage: {fileID: 0}
   prefab: {fileID: 3157075755909196197, guid: 404cb6ff932db7543a6b35c89026af27, type: 3}
   spawnPoint: {x: 14.29, y: 0.25, z: -6.49}
+  dialogueLines:
+  - Um...who are you...?
+  talkLines:
+  - Um...okay...
+  askLines:
+  - THIS WILL EVENTUALLY GIVE YOU OPTIONS TO ASK ME THINGS!
+  questLines:
+  - THIS WILL EVENTUALLY GIVE YOU A QUEST!
+  goodbyeLines:
+  - Bye...

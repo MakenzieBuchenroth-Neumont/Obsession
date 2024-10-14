@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class UIManager : MonoBehaviour, ITimeTracker {
 	public static UIManager Instance { get; private set; }
@@ -26,7 +27,6 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 	// the tool slot ui
 	public InventorySlot[] toolSlots;
 
-
 	private void Awake() {
 		if (Instance != null && Instance != this) {
 			Destroy(this);
@@ -43,6 +43,14 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 	}
 
 	private void Start() {
+		DontDestroyOnLoad(toolEquipSlot);
+		DontDestroyOnLoad(toolEquipSlotParent);
+		DontDestroyOnLoad(timeText);
+		DontDestroyOnLoad(dateText);
+		DontDestroyOnLoad(inventoryPanel);
+		DontDestroyOnLoad(toolEquipSlot);
+		DontDestroyOnLoad(toolEquipSlotParent);
+
 		renderInventory();
 		AssignSlotIndexes();
 
@@ -117,8 +125,16 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 		if (hours > 12) {
 			//Time becomes PM 
 			prefix = "PM ";
-			hours = hours - 12;
-			Debug.Log(hours);
+			if (hours > 12) {
+				hours -= 12;
+			}
+		}
+		else {
+			prefix = "AM ";
+		}
+
+		if (hours == 0) {
+			hours = 12;
 		}
 
 		//Format it for the time text display

@@ -23,6 +23,8 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 	private void Start() {
 		TimeManager.Instance.registerTracker(this);
 
+		DontDestroyOnLoad(this.gameObject);
+
 		foreach (var schedule in npcSchedules) {
 			if (schedule.student != null && schedule.student.prefab != null) {
 				GameObject npcInstance = Instantiate(schedule.student.prefab);
@@ -69,9 +71,25 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 	}
 
 	private bool ShouldNPCStartMoving(Student student, ScheduleEvent scheduleEvent, GameTimestamp currentTime) {
-		if (scheduleEvent.ignoreDayOfTheWeek || scheduleEvent.dayOfTheWeek == currentTime.GetDayOfTheWeek()) {
-			GameObject npcInstance = npcInstances[student];
-			NavMeshAgent navAgent = npcInstance?.GetComponent<NavMeshAgent>();
+		if (student == null) {
+			Debug.LogWarning("One of the required objects in 'ShouldNPCStartMoving' is null.");
+			return false;
+		}
+		if (!npcInstances.ContainsKey(student)) {
+			Debug.LogWarning($"No NPC instance found for student: {student}. Ensure they are properly registered.");
+			return false;
+		}
+
+		GameObject npcInstance = npcInstances[student];
+		if (npcInstance == null) {
+			Debug.LogWarning($"NPC instance for student: {student} is null.");
+			return false;
+		}
+		NavMeshAgent navAgent = npcInstances[student].GetComponent<NavMeshAgent>();
+		if (navAgent == null) {
+			Debug.LogWarning($"NavMeshAgent is missing for student: {student}.");
+			return false;
+		}
 			Vector3 currentPosition = navAgent.transform.position;
 			Vector3 targetPosition = scheduleEvent.coord;
 
@@ -84,11 +102,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 
 			int startMovingMinutes = eventMinutes - (int)travelTimeInMinutes;
 
-			if (currentMinutes >= startMovingMinutes) {
-				return true;
-			}
-		}
-		return false;
+			return currentMinutes >= startMovingMinutes;
 	}
 
 	private void PrepareNPCForNextEvent(Student student, ScheduleEvent scheduleEvent, GameTimestamp currentTime) {
@@ -166,6 +180,22 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		}
 		
 		return nearestClassroom;
+	}
+
+	public void RegisterNPC(Student student, GameObject npcInstance) {
+		if (!npcInstances.ContainsKey(student)) {
+			npcInstances[student] = npcInstance;
+			var navAgent = npcInstance.GetComponent<NavMeshAgent>();
+			if (navAgent == null) {
+				navAgent = npcInstance.AddComponent<NavMeshAgent>();
+			}
+			navAgent.speed = walkingSpeed;
+
+			isWeaponPickupInProgress[student] = false;
+		}
+		else {
+			Debug.Log($"NPC Instance for student {student.name} is already registered.");
+		}
 	}
 
 	private void OnDestroy() {

@@ -10,18 +10,17 @@ public class TransferScenes : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other) {
 		if (other.gameObject.tag == "Player") {
-			Scene sceneToLoad = SceneManager.GetSceneByName(sceneName);
-			SceneManager.LoadScene(sceneName);
-			SceneManager.MoveGameObjectToScene(player.gameObject, sceneToLoad);
+			StartCoroutine(LoadSceneAsync());
 		}
 	}
-	// Start is called before the first frame update
-	void Start() {
 
-	}
+	private IEnumerator LoadSceneAsync() {
+		AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 
-	// Update is called once per frame
-	void Update() {
-
+		while (!asyncLoad.isDone) {
+			yield return null;
+		}
+		Scene sceneToLoad = SceneManager.GetSceneByName(sceneName);
+		SceneManager.MoveGameObjectToScene(player, sceneToLoad);
 	}
 }
