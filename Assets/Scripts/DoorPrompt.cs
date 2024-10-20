@@ -8,36 +8,24 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class DoorPrompt : MonoBehaviour {
-	[SerializeField] GameObject doorPrompt;
 	[SerializeField] Transform doorTransform;
 	[SerializeField] BoxCollider doorBoxCollider;
 	[SerializeField] BoxCollider wallBoxCollider;
 	bool doorOpened = false;
 
-	private void OnCollisionStay(Collision collision) {
-			if (collision.gameObject.tag.Equals("Player")) {
-			Debug.Log("Player entered door trigger area.");
+	private bool isPlayerNearby = false;
 
-			Vector3 promptLocation = Camera.main.WorldToScreenPoint(doorTransform.transform.position) * 1;
-			doorPrompt.transform.position = promptLocation;
-			doorPrompt.SetActive(true);
-			if (Input.GetKeyDown(KeyCode.F)) {
-				toggleDoor();
-			}
-		}
-		else if (collision.gameObject.tag.Equals("NPC")) {
-			NavMeshAgent agent = collision.gameObject.GetComponent<NavMeshAgent>();
-			if (agent != null && !doorOpened) {
-				agent.isStopped = true;
-				toggleDoor();
-				StartCoroutine(ResumeAfterDoorOpened(agent));
-			}
+	private void OnTriggerEnter(Collider other) {
+		if (other.CompareTag("Player")) {
+			isPlayerNearby = true;
+			UIManager.Instance.showInteractionPrompt("Open Door");
 		}
 	}
 
-	private void OnCollisionExit(Collision collision) {
-		if (collision.gameObject.tag.Equals("Player")) {
-			doorPrompt.SetActive(false);
+	private void OnTriggerExit(Collider other) {
+		if (other.CompareTag("Player")) {
+			isPlayerNearby = false;
+			UIManager.Instance.hideInteractionPrompt();
 		}
 	}
 
@@ -56,6 +44,23 @@ public class DoorPrompt : MonoBehaviour {
 			wallBoxCollider.enabled = false;
 			Debug.Log("doorBoxCollider.enabled: " + doorBoxCollider.enabled);
 			Debug.Log("wallBoxCollider.enabled: " + wallBoxCollider.enabled);
+		}
+	}
+
+	private void Update() {
+		if (isPlayerNearby && Input.GetKeyDown(KeyCode.F)) {
+			toggleDoor();
+		}
+	}
+
+	private void OnCollisionEnter(Collision collision) {
+		if (collision.gameObject.CompareTag("NPC")) {
+			NavMeshAgent agent = collision.gameObject.GetComponent<NavMeshAgent>();
+			if (agent != null && !doorOpened) {
+				agent.isStopped = true;
+				toggleDoor();
+				StartCoroutine(ResumeAfterDoorOpened(agent));
+			}
 		}
 	}
 

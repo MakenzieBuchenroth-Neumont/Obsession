@@ -5,6 +5,8 @@ using UnityEngine;
 public class Sleep : MonoBehaviour {
 	[SerializeField] GameObject sleepPrompt;
 
+	private bool isPlayerNearby = false;
+
 	// Start is called before the first frame update
 	void Start() {
 
@@ -16,19 +18,16 @@ public class Sleep : MonoBehaviour {
 	}
 
 	private void OnTriggerEnter(Collider other) {
-		if (other.gameObject.tag == "Player") {
-			Vector3 promptLocation = Camera.main.WorldToScreenPoint(this.transform.position) * 1;
-			sleepPrompt.transform.position = promptLocation;
-			sleepPrompt.SetActive(true);
-			if (Input.GetKeyDown(KeyCode.F)) {
-				//SaveLoad.save();
-			}
+		if (other.CompareTag("Player")) {
+			isPlayerNearby = true;
+			UIManager.Instance.showInteractionPrompt($"Press 'F' to sleep.");
 		}
 	}
 
 	private void OnTriggerExit(Collider other) {
-		if (other.gameObject.tag == "Player") {
-			sleepPrompt.SetActive(false);
+		if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.F)) {
+			//SaveLoad.save();
+			UIManager.Instance.hideInteractionPrompt();
 		}
 	}
 }

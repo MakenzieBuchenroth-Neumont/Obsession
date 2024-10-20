@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using System;
 
 public class UIManager : MonoBehaviour, ITimeTracker {
 	public static UIManager Instance { get; private set; }
+	[SerializeField] public GameObject interactionPrompt;
 
 	[Header("Status Bar")]
 	// tool equip slot
@@ -27,18 +29,14 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 	// the tool slot ui
 	public InventorySlot[] toolSlots;
 
+	#region AwakeStartUpdate
 	private void Awake() {
 		if (Instance != null && Instance != this) {
 			Destroy(this);
+			DontDestroyOnLoad(gameObject);
 		}
 		else {
 			Instance = this;
-		}
-	}
-
-	public void AssignSlotIndexes() {
-		for (int i = 0; i < toolSlots.Length; i++) {
-			toolSlots[i].AssignIndex(i);
 		}
 	}
 
@@ -60,6 +58,14 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 
 	private void Update() {
 		renderInventory();
+	}
+	#endregion
+
+	#region Inventory
+	public void AssignSlotIndexes() {
+		for (int i = 0; i < toolSlots.Length; i++) {
+			toolSlots[i].AssignIndex(i);
+		}
 	}
 
 	//Render the inventory screen to reflect the Player's Inventory. 
@@ -110,6 +116,7 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 	public void toggleInventoryPanel() {
 		inventoryPanel.SetActive(!inventoryPanel.activeSelf);
 	}
+	#endregion
 
 	// callback to handle the UI for time
 	public void clockUpdate(GameTimestamp timestamp) {
@@ -148,6 +155,20 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 
 		// format
 		dateText.text = dayOfTheWeek;
-	} 
+	}
 
+	#region Interaction Prompt
+	public void showInteractionPrompt(string message) {
+		if (interactionPrompt != null) {
+			interactionPrompt.SetActive(true);
+			interactionPrompt.GetComponentInChildren<TMP_Text>().text = message;
+		}
+	}
+
+	public void hideInteractionPrompt() {
+		if (interactionPrompt != null) {
+			interactionPrompt.SetActive(false);
+		}
+	}
+	#endregion
 }
