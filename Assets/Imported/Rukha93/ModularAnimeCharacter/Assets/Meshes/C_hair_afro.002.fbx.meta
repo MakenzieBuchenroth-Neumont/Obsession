@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 1b1628e439a51bc41bb0e1e50b26cc1c
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -29,7 +29,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -45,6 +45,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -72,6 +73,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -85,7 +87,42 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: C_hair_afro.002(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: afro.02
+      parentName: C_hair_afro.002(Clone)
+      position: {x: -0.000000005001565, y: -1.4089998, z: 0.0006453579}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hair_afro.002
+      parentName: C_hair_afro.002(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: root
+      parentName: hair_afro.002
+      position: {x: -0, y: 0.000000042245517, z: 0}
+      rotation: {x: 0.70710695, y: -0.000000084293674, z: -0.00000008429372, w: 0.7071066}
+      scale: {x: 1, y: 1, z: 1}
+    - name: back
+      parentName: root
+      position: {x: -9.399143e-10, y: 0.13207422, z: -0.003942286}
+      rotation: {x: -0.22665013, y: -0.2793453, z: 0.068037346, w: 0.9305734}
+      scale: {x: 1.0000002, y: 1.0000001, z: 0.9999999}
+    - name: back.001
+      parentName: back
+      position: {x: 0.0000000016245653, y: 0.05058086, z: -0.0000000122062875}
+      rotation: {x: 0.0065488815, y: -0.000000029802322, z: -0.0043211877, w: 0.99996924}
+      scale: {x: 1, y: 1.0000004, z: 1.0000004}
+    - name: back.001_end
+      parentName: back.001
+      position: {x: -0, y: 0.062998384, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -96,14 +133,15 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

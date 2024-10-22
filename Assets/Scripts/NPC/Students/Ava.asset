@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c473fbfb7aa9fd409c02078337d35b3, type: 3}
+  m_Name: Ava
+  m_EditorClassIdentifier: 
+  studentName: Ava Flumberton
+  year: 2
+  personality: 5
+  studentClass: 5
+  studentImage: {fileID: 21300000, guid: e4073c15d26044b428594a714a1ca397, type: 3}
+  prefab: {fileID: 8447328502359583267, guid: 248da5295178c824ca528ef8122545c7, type: 3}
+  spawnPoint: {x: 8.561201, y: 0.002856851, z: -4.936}
+  quest: {fileID: 11400000, guid: 177257ff5b0e075409feb32ff02706bc, type: 2}
+  dialogueLines:
+  - Hello!
+  talkLines:
+  - Haha! That's so true!
+  askLines:
+  - THIS WILL EVENTUALLY GIVE YOU OPTIONS TO ASK ME THINGS!
+  questLines:
+  - You want to do something for me?
+  - Well...it's a little embarrasing, but...I think I'll fail math if I don't get
+    a good score on the next test.
+  - Would you be willing to...steal the answers for me?
+  goodbyeLines:
+  - See you around!

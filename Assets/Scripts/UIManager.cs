@@ -32,23 +32,14 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 	#region AwakeStartUpdate
 	private void Awake() {
 		if (Instance != null && Instance != this) {
-			Destroy(this);
-			DontDestroyOnLoad(gameObject);
+			Destroy(gameObject);
+			return;
 		}
-		else {
-			Instance = this;
-		}
+		Instance = this;
+		DontDestroyOnLoad(gameObject);
 	}
 
 	private void Start() {
-		DontDestroyOnLoad(toolEquipSlot);
-		DontDestroyOnLoad(toolEquipSlotParent);
-		DontDestroyOnLoad(timeText);
-		DontDestroyOnLoad(dateText);
-		DontDestroyOnLoad(inventoryPanel);
-		DontDestroyOnLoad(toolEquipSlot);
-		DontDestroyOnLoad(toolEquipSlotParent);
-
 		renderInventory();
 		AssignSlotIndexes();
 
@@ -161,7 +152,13 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 	public void showInteractionPrompt(string message) {
 		if (interactionPrompt != null) {
 			interactionPrompt.SetActive(true);
-			interactionPrompt.GetComponentInChildren<TMP_Text>().text = message;
+			TMP_Text textComponent = interactionPrompt.GetComponentInChildren<TMP_Text>();
+			if (textComponent != null) {
+				textComponent.text = message;
+			}
+			else {
+				Debug.Log("No text component found.");
+			}
 		}
 	}
 

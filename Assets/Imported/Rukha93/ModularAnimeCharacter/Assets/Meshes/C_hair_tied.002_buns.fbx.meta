@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 6f2399fffdfc8724d8aed3615e07a506
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -29,7 +29,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -45,6 +45,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -72,6 +73,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -85,7 +87,77 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: C_hair_tied.002_buns(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hair_tied.02
+      parentName: C_hair_tied.002_buns(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 0.99999905, y: 0.99999905, z: 0.99999905}
+    - name: root
+      parentName: hair_tied.02
+      position: {x: -0, y: 0.000000042245517, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: side.L.004
+      parentName: root
+      position: {x: -0.07337219, y: 0.13553214, z: -0.06062467}
+      rotation: {x: -0.51578873, y: 0.5032757, z: 0.47081316, w: 0.5089308}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: side.L.006
+      parentName: side.L.004
+      position: {x: 0.0000000019371509, y: 0.03460035, z: -5.9604643e-10}
+      rotation: {x: -0.023548275, y: -0.08415127, z: 0.024822623, w: 0.99586546}
+      scale: {x: 0.9999999, y: 0.9999999, z: 1}
+    - name: side.L.007
+      parentName: side.L.006
+      position: {x: 0.000000005960464, y: 0.0503378, z: 0.0000000047683715}
+      rotation: {x: -0.07154016, y: 0.022604108, z: -0.015561502, w: 0.9970601}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: side.L.008
+      parentName: side.L.007
+      position: {x: -0.0000000043585895, y: 0.08947155, z: 0.000000015050173}
+      rotation: {x: 0.06435284, y: -0.0054245484, z: -0.010433243, w: 0.9978579}
+      scale: {x: 1, y: 1, z: 0.9999998}
+    - name: side.L.008_end
+      parentName: side.L.008
+      position: {x: -0, y: 0.08024955, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: side.R.004
+      parentName: root
+      position: {x: 0.07337219, y: 0.13553214, z: -0.06062467}
+      rotation: {x: -0.51578873, y: -0.5032757, z: -0.47081316, w: 0.5089308}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: side.R.006
+      parentName: side.R.004
+      position: {x: -0.0000000019371509, y: 0.03460035, z: -5.9604643e-10}
+      rotation: {x: -0.023548275, y: 0.08415127, z: -0.024822623, w: 0.99586546}
+      scale: {x: 0.9999999, y: 0.9999999, z: 1}
+    - name: side.R.007
+      parentName: side.R.006
+      position: {x: -0.000000005960464, y: 0.0503378, z: 0.0000000047683715}
+      rotation: {x: -0.07154016, y: -0.022604108, z: 0.015561502, w: 0.9970601}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
+    - name: side.R.008
+      parentName: side.R.007
+      position: {x: 0.0000000043585895, y: 0.08947155, z: 0.000000015050173}
+      rotation: {x: 0.06435284, y: 0.0054245484, z: 0.010433243, w: 0.9978579}
+      scale: {x: 1, y: 1, z: 0.9999998}
+    - name: side.R.008_end
+      parentName: side.R.008
+      position: {x: -0, y: 0.08024955, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: tied.02.upbuns
+      parentName: C_hair_tied.002_buns(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -96,14 +168,15 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

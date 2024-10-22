@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 5a94c9c85b8cd3744a31708be7b5f080
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -29,7 +29,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -45,6 +45,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -72,6 +73,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -85,7 +87,82 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: C_hair_bangs.002(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bangs.002
+      parentName: C_hair_bangs.002(Clone)
+      position: {x: 4.2947867e-12, y: -1.4089998, z: 0.0006453579}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hair_bangs.002
+      parentName: C_hair_bangs.002(Clone)
+      position: {x: 0.000000005005859, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: root
+      parentName: hair_bangs.002
+      position: {x: 0, y: 0.09843782, z: 0.000000014901161}
+      rotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: side.L
+      parentName: root
+      position: {x: -0.014129158, y: 0.1642159, z: 0.08854993}
+      rotation: {x: -0.22932059, y: 0.21242647, z: 0.88409275, w: 0.34737176}
+      scale: {x: 1, y: 1, z: 1}
+    - name: side.L.001
+      parentName: side.L
+      position: {x: 0.0000000023841857, y: 0.044964112, z: -0.0000000047683715}
+      rotation: {x: -0.3144357, y: 0.038723968, z: 0.12976171, w: 0.9395705}
+      scale: {x: 1, y: 1, z: 1}
+    - name: side.L.002
+      parentName: side.L.001
+      position: {x: -0, y: 0.05613427, z: 0.00000000692904}
+      rotation: {x: -0.2112313, y: 0.09887251, z: -0.0015167774, w: 0.9724213}
+      scale: {x: 1.0000002, y: 1.0000002, z: 1.0000002}
+    - name: side.L.002_end
+      parentName: side.L.002
+      position: {x: -0, y: 0.046463117, z: 0}
+      rotation: {x: 0.014378516, y: 0.06943226, z: -0.1526298, w: 0.98573655}
+      scale: {x: 1, y: 1, z: 1}
+    - name: side.R
+      parentName: root
+      position: {x: 0.014129158, y: 0.1642159, z: 0.08854993}
+      rotation: {x: 0.20995669, y: 0.20096254, z: 0.89851063, w: -0.32895434}
+      scale: {x: 1, y: 1, z: 0.9999999}
+    - name: side.R.001
+      parentName: side.R
+      position: {x: 0.0000000023841857, y: 0.045069266, z: 0.0000000035762786}
+      rotation: {x: -0.31830642, y: -0.19581339, z: -0.07506584, w: 0.9245016}
+      scale: {x: 1, y: 0.99999976, z: 1}
+    - name: side.R.002
+      parentName: side.R.001
+      position: {x: -0.0000000047683715, y: 0.059879217, z: 0.0000000035762786}
+      rotation: {x: -0.22709544, y: 0.0010203869, z: -0.03078569, w: 0.9733853}
+      scale: {x: 1, y: 1.0000002, z: 0.99999976}
+    - name: side.R.002_end
+      parentName: side.R.002
+      position: {x: -0, y: 0.05790939, z: 0}
+      rotation: {x: 0.024120424, y: -0.1057741, z: 0.21002916, w: 0.9716573}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mid
+      parentName: root
+      position: {x: -0.00042287202, y: 0.16798273, z: 0.09453241}
+      rotation: {x: -0.0016482619, y: 0.9778811, z: 0.19120884, w: 0.08476575}
+      scale: {x: 0.99999976, y: 0.9999999, z: 1.0000011}
+    - name: mid.001
+      parentName: mid
+      position: {x: -2.9802322e-10, y: 0.050713796, z: -0.000000010649673}
+      rotation: {x: -0.23054513, y: -0.06975457, z: -0.5478858, w: 0.801127}
+      scale: {x: 1.0000001, y: 0.99999976, z: 0.9999997}
+    - name: mid.001_end
+      parentName: mid.001
+      position: {x: -0, y: 0.04484678, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -96,14 +173,15 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

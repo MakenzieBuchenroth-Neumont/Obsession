@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 [CreateAssetMenu(menuName = "Character/New Student")]
 public class Student : ScriptableObject {
+	[Header("Basic Information")]
 	[SerializeField] private string studentName;
 	[SerializeField] private studentYear year;
 	[SerializeField] private studentPersonality personality;
@@ -12,6 +13,8 @@ public class Student : ScriptableObject {
 	[SerializeField] private Sprite studentImage;
 	[SerializeField] public GameObject prefab;
 	[SerializeField] public Vector3 spawnPoint;
+
+	[Header("Dialogue and Quest")]
 	public Quest quest;
 
 	[SerializeField] private string[] dialogueLines;
@@ -19,6 +22,15 @@ public class Student : ScriptableObject {
 	[SerializeField] private string[] askLines;
 	[SerializeField] private string[] questLines;
 	[SerializeField] private string[] goodbyeLines;
+
+	[Header("World Information")]
+	private bool isDead = false;
+	public bool IsDead {
+		get { return isDead; }
+		set {
+			isDead = value;
+		}
+	}
 
 	public string StudentName => studentName;
 	public studentYear Year => year;
@@ -30,6 +42,7 @@ public class Student : ScriptableObject {
 	public string[] AskLines => askLines;
 	public string[] QuestLines => questLines;
 	public string[] GoodbyeLines => goodbyeLines;
+
 
 	public enum studentYear {
 		One = 1,

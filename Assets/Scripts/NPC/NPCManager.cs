@@ -19,24 +19,34 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 	public float runningSpeed = 3f;
 	public int maxAcceptableLateness = 5;
 
+	#region Start & Update
 	private void Start() {
 		TimeManager.Instance.registerTracker(this);
 
 		DontDestroyOnLoad(this.gameObject);
 
 		foreach (var schedule in npcSchedules) {
-			if (schedule.student != null && schedule.student.prefab != null) {
-				GameObject npcInstance = Instantiate(schedule.student.prefab);
-				npcInstance.transform.position = schedule.student.spawnPoint;
-				npcInstances[schedule.student] = npcInstance;
+			Debug.Log($"Spawning NPC: {schedule.student.name}. IsDead: {schedule.student.IsDead}");
+			if (schedule.student != null && schedule.student.prefab != null && !schedule.student.IsDead) {
+				Animator anim = schedule.student.prefab.GetComponent<Animator>();
+				if (anim != null) {
+					anim.enabled = true;
+					Rigidbody[] rb = GetComponentsInChildren<Rigidbody>();
+					foreach (Rigidbody body in rb) {
+						body.isKinematic = false;
+					}
+					GameObject npcInstance = Instantiate(schedule.student.prefab);
+					npcInstance.transform.position = schedule.student.spawnPoint;
+					npcInstances[schedule.student] = npcInstance;
 
-				var navAgent = npcInstance.GetComponent<NavMeshAgent>();
-				if (navAgent == null) {
-					navAgent = npcInstance.AddComponent<NavMeshAgent>();
+					var navAgent = npcInstance.GetComponent<NavMeshAgent>();
+					if (navAgent == null) {
+						navAgent = npcInstance.AddComponent<NavMeshAgent>();
+					}
+					navAgent.speed = walkingSpeed;
+
+					isWeaponPickupInProgress[schedule.student] = false;
 				}
-				navAgent.speed = walkingSpeed;
-
-				isWeaponPickupInProgress[schedule.student] = false;
 			}
 		}
 	}
@@ -49,7 +59,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 			GameObject npcInstance = npcInstances[student];
 			NavMeshAgent navAgent = npcInstance.GetComponent<NavMeshAgent>();
 
-			if (navAgent.remainingDistance < 0.1f && !navAgent.pathPending) {
+			if (navAgent.remainingDistance < 0.1f && !navAgent.pathPending && !student.IsDead) {
 				arrivedStudents.Add(student);
 			}
 		}
@@ -58,6 +68,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 			npcDestinations.Remove(student);
 		}
 	}
+	#endregion
 
 	public void clockUpdate(GameTimestamp timestamp) {
 		foreach (var npcSchedule in npcSchedules) {
@@ -69,6 +80,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		}
 	}
 
+	#region NPC Movement
 	private bool ShouldNPCStartMoving(Student student, ScheduleEvent scheduleEvent, GameTimestamp currentTime) {
 		if (student == null) {
 			Debug.LogWarning("One of the required objects in 'ShouldNPCStartMoving' is null.");
@@ -88,6 +100,10 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		if (navAgent == null) {
 			Debug.LogWarning($"NavMeshAgent is missing for student: {student}.");
 			return false;
+		}
+
+		if (!student.IsDead) {
+			Debug.LogWarning($"{student} is dead. Can't move!");
 		}
 			Vector3 currentPosition = navAgent.transform.position;
 			Vector3 targetPosition = scheduleEvent.coord;
@@ -113,7 +129,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		int eventMinutes = scheduleEvent.time.hour * 60 + scheduleEvent.time.minute;
 		int availableMinutes = eventMinutes - currentMinutes;
 
-		if (availableMinutes >= 0) {
+		if (availableMinutes >= 0 && !student.IsDead) {
 			navAgent.SetDestination(targetPosition);
 
 			navAgent.speed = walkingSpeed;
@@ -123,10 +139,12 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 			//Debug.Log("$\"NPC {student.name} cannot start moving yet. Waiting for the event time.\");");
 		}
 	}
+	#endregion
 
+	#region Pickup Weapons
 	public void handleWeaponPickup(GameObject weapon) {
 		foreach (var npc in npcInstances) {
-			if (!isWeaponPickupInProgress[npc.Key]) {
+			if (!isWeaponPickupInProgress[npc.Key] && !npc.Key.IsDead) {
 				if (!npcDestinations.ContainsKey(npc.Key)) {
 					isWeaponPickupInProgress[npc.Key] = true;
 					StartCoroutine(PickupAndDeliverWeapon(npc.Key, weapon));
@@ -150,12 +168,12 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		Destroy(weapon); // Destroy or remove the weapon from the ground
 
 		GameObject nearestClassroom = findNearestClassroom(npcInstance.transform.position);
-		if (nearestClassroom != null) {
+		if (nearestClassroom != null && !student.IsDead) {
 			// Route through the nearest door if applicable
 			navAgent.SetDestination(nearestClassroom.transform.position);
 
 			// Wait until NPC reaches the door
-			while (navAgent.remainingDistance > 0.1f || navAgent.pathPending) {
+			while (navAgent.remainingDistance > 0.1f || navAgent.pathPending && !student.IsDead) {
 				yield return null;
 			}
 		}
@@ -180,9 +198,10 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		
 		return nearestClassroom;
 	}
+	#endregion
 
 	public void RegisterNPC(Student student, GameObject npcInstance) {
-		if (!npcInstances.ContainsKey(student)) {
+		if (!npcInstances.ContainsKey(student) && !student.IsDead) {
 			npcInstances[student] = npcInstance;
 			var navAgent = npcInstance.GetComponent<NavMeshAgent>();
 			if (navAgent == null) {
@@ -198,13 +217,26 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 	}
 
 	public void giveQuest(Student student) {
-		if (student.quest != null) {
+		if (student.quest != null && !student.IsDead) {
 			questManager.addQuest(student.quest);
 			Debug.Log($"{student.name} has give you a quest: {student.quest.objective}");
 		}
 		else {
 			Debug.Log($"{student.name} has no quest available.");
 		}
+	}
+
+	private void OnTriggerEnter(Collider other) {
+		if (other.CompareTag("Door")) {
+			DoorPrompt prompt = other.GetComponent<DoorPrompt>();
+            if (prompt != null && !prompt.isDoorOpened()) {
+				prompt.toggleDoor();
+            }
+        }
+	}
+		
+	public void handleNPCStab(Student stabbedStudent) {
+		Debug.Log($"{stabbedStudent.name} was stabbed.");
 	}
 
 	private void OnDestroy() {

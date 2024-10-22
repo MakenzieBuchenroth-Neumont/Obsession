@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 44d3bae9fa1c0f34a8a5005564ddde78
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -29,7 +29,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -45,6 +45,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -72,6 +73,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -85,7 +87,47 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: C_hat.hair_tied(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C_hat_hair_tied01
+      parentName: C_hat.hair_tied(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 0.99999905, y: 0.99999905, z: 0.99999905}
+    - name: root
+      parentName: C_hat_hair_tied01
+      position: {x: -0, y: 0.000000042245517, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: back
+      parentName: root
+      position: {x: 1.6408189e-12, y: 0.11320685, z: -0.035482895}
+      rotation: {x: 0.18910876, y: 0.00000011695032, z: -0.000000022546754, w: -0.98195624}
+      scale: {x: 1, y: 1, z: 1.0000015}
+    - name: back.002
+      parentName: back
+      position: {x: 1.0355605e-15, y: 0.12781356, z: 0.000000001490116}
+      rotation: {x: -0.0026622561, y: 0.0020246895, z: 0.6052906, w: 0.79599756}
+      scale: {x: 1, y: 1, z: 1}
+    - name: back.004
+      parentName: back.002
+      position: {x: -1.7541523e-16, y: 0.06373659, z: -0.000000009536743}
+      rotation: {x: -0.016612321, y: 0.0066668047, z: 0.10249522, w: 0.9945725}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: back.005
+      parentName: back.004
+      position: {x: 2.8865798e-16, y: 0.070609376, z: 0.0000000023841857}
+      rotation: {x: -0.03955422, y: 6.6626656e-11, z: 0.000000009359342, w: 0.99921745}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: tied.01.down.001
+      parentName: C_hat.hair_tied(Clone)
+      position: {x: -0.000000005001566, y: -1.4089999, z: 0.00064535794}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -96,14 +138,15 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: eeaff4613a183e2498b0875eeb4a763b
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -29,7 +29,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -45,6 +45,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -72,6 +73,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -85,7 +87,72 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: C_hair_bangs.003(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: bangs.003
+      parentName: C_hair_bangs.003(Clone)
+      position: {x: 4.2947867e-12, y: -1.4089998, z: 0.0006453579}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hair_bangs.003
+      parentName: C_hair_bangs.003(Clone)
+      position: {x: 0.000000005005859, y: -0.063060924, z: -0.08577001}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: root
+      parentName: hair_bangs.003
+      position: {x: -0, y: 0.000000042245517, z: 0}
+      rotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: side.L
+      parentName: root
+      position: {x: -0.0230851, y: 0.16455026, z: 0.0855201}
+      rotation: {x: -0.27461395, y: 0.09855108, z: 0.95173055, w: 0.09530921}
+      scale: {x: 1.0000005, y: 1.0000001, z: 1.0000002}
+    - name: side.L.001
+      parentName: side.L
+      position: {x: -0, y: 0.04497089, z: 0.0000000011920929}
+      rotation: {x: -0.26654944, y: 0.023325106, z: -0.011349316, w: 0.9634721}
+      scale: {x: 1.0000001, y: 0.9999998, z: 0.9999999}
+    - name: side.L.001_end
+      parentName: side.L.001
+      position: {x: -0, y: 0.047521964, z: 0}
+      rotation: {x: 0.15726832, y: 0.033297207, z: -0.045142017, w: 0.98596156}
+      scale: {x: 1, y: 1, z: 1}
+    - name: side.R
+      parentName: root
+      position: {x: 0.024292959, y: 0.16485155, z: 0.08602004}
+      rotation: {x: 0.19458352, y: 0.094393104, z: 0.9711399, w: -0.10057075}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: side.R.001
+      parentName: side.R
+      position: {x: -0.0000000023841857, y: 0.04153162, z: -0.000000007152557}
+      rotation: {x: -0.23945992, y: -0.09326966, z: -0.04367411, w: 0.9654286}
+      scale: {x: 1.0000002, y: 1.0000002, z: 0.9999999}
+    - name: side.R.001_end
+      parentName: side.R.001
+      position: {x: -0, y: 0.05325749, z: 0}
+      rotation: {x: 0.13431188, y: -0.015133396, z: 0.039673798, w: 0.990029}
+      scale: {x: 1, y: 1, z: 1}
+    - name: mid
+      parentName: root
+      position: {x: -0.00042287202, y: 0.16798273, z: 0.09453241}
+      rotation: {x: -0.0010154119, y: 0.98148876, z: 0.1913831, w: 0.007162492}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000006}
+    - name: mid.001
+      parentName: mid
+      position: {x: 3.7252902e-11, y: 0.049857534, z: -7.9395246e-10}
+      rotation: {x: -0.17203303, y: 0.124742046, z: 0.59680134, w: 0.77373916}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000001}
+    - name: mid.001_end
+      parentName: mid.001
+      position: {x: -0, y: 0.04484678, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -96,14 +163,15 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

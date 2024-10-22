@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: cce711cb9df3e7d43a01370813150058
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -29,7 +29,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -45,6 +45,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -72,6 +73,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -85,7 +87,117 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: C_hat.hair_long(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C_hat_hair_long
+      parentName: C_hat.hair_long(Clone)
+      position: {x: 0, y: 0.105443515, z: 0.052167334}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 0.99999905, y: 0.99999905, z: 0.99999905}
+    - name: root
+      parentName: C_hat_hair_long
+      position: {x: -0, y: 0.000000042245517, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: side.L
+      parentName: root
+      position: {x: -0.07780135, y: 0.1231321, z: 0.035647977}
+      rotation: {x: -0.6611801, y: 0.058521498, z: 0.7469924, w: -0.037663456}
+      scale: {x: 1.0000004, y: 0.9999937, z: 1.0000076}
+    - name: side.L.002
+      parentName: side.L
+      position: {x: -1.4901161e-10, y: 0.11548604, z: 0.0000000062957404}
+      rotation: {x: -0.006851413, y: -0.008793714, z: 0.028533261, w: 0.9995307}
+      scale: {x: 0.9999999, y: 0.99999493, z: 0.99999493}
+    - name: side.L.003
+      parentName: side.L.002
+      position: {x: -0.0000000035762786, y: 0.091798835, z: 4.4703483e-10}
+      rotation: {x: -0.0030311267, y: -0.00047681184, z: 0.033008676, w: 0.9994504}
+      scale: {x: 1, y: 0.99999493, z: 0.9999948}
+    - name: back
+      parentName: root
+      position: {x: 1.6408196e-12, y: 0.12275345, z: -0.083936825}
+      rotation: {x: 0.18506335, y: 0.00000011683361, z: -0.000000022064986, w: -0.98272663}
+      scale: {x: 1, y: 0.99999994, z: 0.99998975}
+    - name: back.002
+      parentName: back
+      position: {x: 7.0776716e-17, y: 0.114406824, z: 0.0000000035762786}
+      rotation: {x: -0.023835301, y: 0.018124776, z: 0.6050226, w: 0.7956451}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: back.004
+      parentName: back.002
+      position: {x: -1.190159e-15, y: 0.12624018, z: -0.000000009536743}
+      rotation: {x: -0.026047526, y: 3.1989723e-11, z: 0.000000006179965, w: 0.99966073}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: side.R
+      parentName: root
+      position: {x: 0.07780132, y: 0.12733397, z: 0.026847549}
+      rotation: {x: 0.6611801, y: 0.058521498, z: 0.7469924, w: 0.037663456}
+      scale: {x: 1.0000004, y: 0.9999937, z: 1.0000076}
+    - name: side.R.002
+      parentName: side.R
+      position: {x: -0.0000000017881393, y: 0.11548605, z: 0.0000000035017729}
+      rotation: {x: -0.006851413, y: 0.008793714, z: -0.028533261, w: 0.9995307}
+      scale: {x: 0.9999999, y: 0.99999493, z: 0.99999493}
+    - name: side.R.003
+      parentName: side.R.002
+      position: {x: -0.0000000035762786, y: 0.09179885, z: -0.000000007599592}
+      rotation: {x: -0.0030311267, y: 0.00047681184, z: -0.033008676, w: 0.9994504}
+      scale: {x: 1, y: 0.99999493, z: 0.9999948}
+    - name: side.L.004
+      parentName: root
+      position: {x: -0.07435228, y: 0.114095435, z: -0.05216734}
+      rotation: {x: 0.76088005, y: -0.0049190996, z: -0.6438287, w: -0.08075877}
+      scale: {x: 1.0000019, y: 0.99999994, z: 1.000002}
+    - name: side.L.006
+      parentName: side.L.004
+      position: {x: -0.0000000055134297, y: 0.10654086, z: -0.0000000073760744}
+      rotation: {x: -0.028093558, y: -0.005054897, z: 0.0013855817, w: 0.9995916}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: side.L.007
+      parentName: side.L.006
+      position: {x: 0.0000000017881393, y: 0.08977869, z: -0.000000010728836}
+      rotation: {x: -0.027358836, y: -0.002177264, z: -0.008582755, w: 0.99958646}
+      scale: {x: 1.0000001, y: 0.99999994, z: 1}
+    - name: side.R.004
+      parentName: root
+      position: {x: 0.07435228, y: 0.114095435, z: -0.05216734}
+      rotation: {x: 0.76088005, y: 0.0049190996, z: 0.6438287, w: -0.08075877}
+      scale: {x: 1.0000019, y: 0.99999994, z: 1.000002}
+    - name: side.R.006
+      parentName: side.R.004
+      position: {x: 0.0000000055134297, y: 0.10654086, z: -0.0000000073760744}
+      rotation: {x: -0.028093558, y: 0.005054897, z: -0.0013855817, w: 0.9995916}
+      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+    - name: side.R.007
+      parentName: side.R.006
+      position: {x: -0.0000000017881393, y: 0.08977869, z: -0.000000010728836}
+      rotation: {x: -0.027358836, y: 0.002177264, z: 0.008582755, w: 0.99958646}
+      scale: {x: 1.0000001, y: 0.99999994, z: 1}
+    - name: front
+      parentName: root
+      position: {x: 1.6408181e-12, y: 0.12995256, z: 0.11967199}
+      rotation: {x: 0.00000007082179, y: 0.08251579, z: 0.9965898, w: -0.00000004972488}
+      scale: {x: 1, y: 1.0000002, z: 1.0000094}
+    - name: front.002
+      parentName: front
+      position: {x: 1.4371837e-15, y: 0.10638065, z: 2.9802322e-10}
+      rotation: {x: 0.0004138501, y: 2.1356589e-10, z: -8.026215e-11, w: 0.99999994}
+      scale: {x: 1, y: 0.99999994, z: 0.9999999}
+    - name: front.003
+      parentName: front.002
+      position: {x: 7.2164497e-16, y: 0.08228617, z: -0.00000000834465}
+      rotation: {x: -0.040417075, y: 1.1044466e-14, z: 0.0000000061028653, w: 0.99918294}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: long.001_low.003
+      parentName: C_hat.hair_long(Clone)
+      position: {x: 0.0000018339822, y: -1.4088898, z: 0.0010757897}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -96,14 +208,15 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

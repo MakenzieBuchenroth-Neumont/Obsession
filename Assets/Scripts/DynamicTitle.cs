@@ -42,13 +42,13 @@ public class DynamicTitle : MonoBehaviour {
 	[Header("Animator")]
 	[SerializeField] Animator anim;
 
-	float timer = 0f;
+	float timer = 3f;
 
 	private State state { get; set; }
 
 	// Start is called before the first frame update
 	void Start() {
-		timer = 0f;
+		timer = 3f;
 		state = State.Cheery;
 		anim.SetBool("dark", false);
 		cheerfulOverlay.gameObject.SetActive(true);
@@ -57,13 +57,13 @@ public class DynamicTitle : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		timer += Time.deltaTime;
-		if (timer >= 3f) {
+		timer -= Time.deltaTime;
+		if (timer <= 0f) {
 			state = (state == State.Cheery) ? State.Evil : State.Cheery;
 
 			updateSpriteStates();
+		timer = 3f;
 		}
-		timer = 0;
 	}
 
 	public void updateSpriteStates() {

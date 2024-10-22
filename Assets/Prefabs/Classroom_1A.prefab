@@ -2214,7 +2214,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 245d21a31cc66ba47ac5d11c1d51363a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doorPrompt: {fileID: 0}
   doorTransform: {fileID: 1670031613967332157}
   doorBoxCollider: {fileID: 3471295541973120631}
   wallBoxCollider: {fileID: 1691196208923171659}

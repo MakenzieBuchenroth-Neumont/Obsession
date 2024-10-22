@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 216f471aecf5fb745b42e48b6e28eff7
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -29,7 +29,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -45,6 +45,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -72,6 +73,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -85,7 +87,87 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: C_hat.hair_medium(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: baseballcap_hair_medium.001
+      parentName: C_hat.hair_medium(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: C_hat_hair_medium
+      parentName: C_hat.hair_medium(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 0.99999905, y: 0.99999905, z: 0.99999905}
+    - name: root
+      parentName: C_hat_hair_medium
+      position: {x: -0, y: 0.000000042245517, z: 0}
+      rotation: {x: 0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 1, y: 1, z: 1}
+    - name: side.L
+      parentName: root
+      position: {x: -0.07906833, y: 0.12676796, z: 0.011548452}
+      rotation: {x: -0.6877868, y: 0.024771562, z: 0.72521806, w: 0.019860728}
+      scale: {x: 1.0000039, y: 0.99999994, z: 1.0000001}
+    - name: side.L.001
+      parentName: side.L
+      position: {x: -2.6077032e-10, y: 0.06425626, z: -0.000000014230609}
+      rotation: {x: -0.036592677, y: 0.028171366, z: -0.0066738306, w: 0.99891084}
+      scale: {x: 1, y: 0.99999946, z: 0.9999995}
+    - name: side.L.003
+      parentName: side.L.001
+      position: {x: 0.0000000015483237, y: 0.0616269, z: 0.0000000010419171}
+      rotation: {x: -0.018777438, y: -0.0045929817, z: 0.009475892, w: 0.99976826}
+      scale: {x: 0.9999999, y: 0.99999917, z: 0.99999917}
+    - name: back
+      parentName: root
+      position: {x: -0.0000000046979505, y: 0.12649098, z: -0.085536115}
+      rotation: {x: 0.18308778, y: 0.0000001163138, z: -0.000000021828521, w: -0.9830966}
+      scale: {x: 1, y: 1, z: 1.0000004}
+    - name: back.002
+      parentName: back
+      position: {x: 1.0658141e-16, y: 0.057585847, z: -0.0000000058114518}
+      rotation: {x: 0.00026760998, y: 0.00020393892, z: -0.6052939, w: 0.79600203}
+      scale: {x: 1, y: 1, z: 1}
+    - name: back.003
+      parentName: back.002
+      position: {x: -3.5527136e-17, y: 0.057321183, z: -0.000000006034969}
+      rotation: {x: -0.031454492, y: 0.000000119107284, z: 0.000000003792446, w: 0.9995052}
+      scale: {x: 1, y: 1, z: 1}
+    - name: side.R
+      parentName: root
+      position: {x: 0.0790684, y: 0.12676798, z: 0.011548509}
+      rotation: {x: 0.6877868, y: 0.024771562, z: 0.72521806, w: -0.019860728}
+      scale: {x: 1.0000039, y: 0.99999994, z: 1.0000001}
+    - name: side.R.001
+      parentName: side.R
+      position: {x: -8.9406965e-10, y: 0.06425626, z: -0.0000000010430813}
+      rotation: {x: -0.036592677, y: -0.028171366, z: 0.0066738306, w: 0.99891084}
+      scale: {x: 1, y: 0.99999946, z: 0.9999995}
+    - name: side.R.003
+      parentName: side.R.001
+      position: {x: -0.0000000013317912, y: 0.0616269, z: 7.427297e-10}
+      rotation: {x: -0.018777438, y: 0.0045929817, z: -0.009475892, w: 0.99976826}
+      scale: {x: 0.9999999, y: 0.99999917, z: 0.99999917}
+    - name: front
+      parentName: root
+      position: {x: 5.2879527e-13, y: 0.12721865, z: 0.13057493}
+      rotation: {x: 0.9983543, y: -0.0000000068532984, z: -0.0000001190297, w: 0.057347246}
+      scale: {x: 1, y: 0.9999999, z: 0.9999673}
+    - name: front.001
+      parentName: front
+      position: {x: 7.675804e-16, y: 0.0564969, z: 0}
+      rotation: {x: 0.024813503, y: 1.7099289e-11, z: -0.0000000059323297, w: 0.9996921}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: front.002
+      parentName: front.001
+      position: {x: 2.1646573e-15, y: 0.06708572, z: -0.0000000057183205}
+      rotation: {x: 0.021327576, y: -4.0051246e-15, z: -0.0000000050847238, w: 0.99977255}
+      scale: {x: 1, y: 1, z: 0.99999994}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -96,14 +178,15 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 

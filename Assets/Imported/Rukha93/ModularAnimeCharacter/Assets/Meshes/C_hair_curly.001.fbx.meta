@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: ebcecc85527815d429920ee34c1646fa
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects:
   - first:
@@ -29,7 +29,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -45,6 +45,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -72,6 +73,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -85,7 +87,42 @@ ModelImporter:
   humanDescription:
     serializedVersion: 3
     human: []
-    skeleton: []
+    skeleton:
+    - name: C_hair_curly.001(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: hair_curly.001
+      parentName: C_hair_curly.001(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
+      scale: {x: 0.99999905, y: 0.99999905, z: 0.99999905}
+    - name: root
+      parentName: hair_curly.001
+      position: {x: -0, y: 0.000000042245517, z: 0}
+      rotation: {x: 0.6617484, y: -0.00000008937429, z: -0.000000078886536, w: 0.74972606}
+      scale: {x: 1, y: 1, z: 1}
+    - name: back
+      parentName: root
+      position: {x: 4.6557808e-17, y: 0.13570088, z: 1.952867e-10}
+      rotation: {x: -0.17557342, y: -4.263256e-14, z: 0.000000041859945, w: 0.9844663}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: back.001
+      parentName: back
+      position: {x: -1.1368684e-15, y: 0.072383545, z: -0.0000000047683715}
+      rotation: {x: -0.006721436, y: 0.000000119206575, z: 8.012647e-10, w: 0.9999774}
+      scale: {x: 1, y: 1.0000004, z: 1.0000004}
+    - name: back.001_end
+      parentName: back.001
+      position: {x: -0, y: 0.0810311, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: curly.001_low
+      parentName: C_hair_curly.001(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -96,14 +133,15 @@ ModelImporter:
     globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
