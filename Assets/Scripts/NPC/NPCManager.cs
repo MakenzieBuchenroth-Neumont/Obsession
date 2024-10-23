@@ -239,6 +239,22 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		Debug.Log($"{stabbedStudent.name} was stabbed.");
 	}
 
+	public void handleWeaponThreat(GameObject npc) {
+		Student student = findStudentByNPC(npc);
+		if (student != null) {
+			student.reactToWeapon();
+		}
+	}
+
+	public Student findStudentByNPC(GameObject npc) {
+		foreach (var kvp in npcInstances) {
+			if (kvp.Value == npc) {
+				return kvp.Key;
+			}
+		}
+		return null;
+	}
+
 	private void OnDestroy() {
 		TimeManager.Instance.unregisterTracker(this);
 	}

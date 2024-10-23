@@ -84,4 +84,22 @@ public class Student : ScriptableObject {
 		FourC,
 		FourD
 	}
+
+	public void reactToWeapon() {
+		if (IsDead) {
+			Debug.Log($"{name} cannot react because they are dead.");
+		};
+
+		Debug.Log($"{name} saw you carrying a weapon!");
+
+		Animator anim = prefab.GetComponent<Animator>();
+		if (anim != null) {
+			anim.SetTrigger("WeaponReact");
+		}
+
+		AudioSource audio = prefab.GetComponent<AudioSource>();
+		if (audio != null) {
+			audio.Play();
+		}
+	}
 }

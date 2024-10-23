@@ -192,4 +192,11 @@ public class InventoryManager : MonoBehaviour {
 		}
 		dropHeldItem();
 	}
+
+	public bool hasEquippedWeapon() {
+		if (equippedTool != null && equippedTool.isWeapon) {
+			return true;
+		}
+		return false;
+	}
 }
