@@ -35,6 +35,7 @@ public class Student : ScriptableObject {
 			isDead = value;
 		}
 	}
+	public bool isMoving = false;
 
 	public string StudentName => studentName;
 	public studentYear Year => year;
@@ -46,6 +47,8 @@ public class Student : ScriptableObject {
 	public string[] AskLines => askLines;
 	public string[] QuestLines => questLines;
 	public string[] GoodbyeLines => goodbyeLines;
+
+	public Vector3 facingDir = Vector3.zero;
 
 	public enum studentYear {
 		One = 1,

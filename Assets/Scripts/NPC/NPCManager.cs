@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using static UnityEngine.Rendering.VolumeComponent;
@@ -27,7 +28,14 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 	}
 
 	public void Update() {
-	}
+        foreach (KeyValuePair<Student, GameObject> student in npcInstances) {
+			if (!student.Key.isMoving) {
+				// TO_DO: FIX LERP SO THEY SPIN THE SHORT WAY
+				Vector3 vec = Vector3.Lerp(student.Value.transform.rotation.eulerAngles, student.Key.facingDir, Time.deltaTime);
+				student.Value.transform.rotation = Quaternion.Euler(vec);
+			}
+        }
+    }
 	#endregion
 
 	public void clockUpdate(GameTimestamp timestamp) {
@@ -83,15 +91,18 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 			Vector3 targetPosition = student.getTargetPosition(scheduleEvent.location);
 
         float distance = Vector3.Distance(currentPosition, targetPosition);
-			float travelTimeInSeconds = distance / walkingSpeed;
-			float travelTimeInMinutes = travelTimeInSeconds / 60;
+		float travelTimeInSeconds = distance / walkingSpeed;
+		float travelTimeInMinutes = travelTimeInSeconds * TimeManager.Instance.timeScale;
 
-			int currentMinutes = currentTime.hour * 60 + currentTime.minute;
-			int eventMinutes = scheduleEvent.time.hour * 60 + scheduleEvent.time.minute;
+		int currentMinutes = currentTime.hour * 60 + currentTime.minute;
+		int eventMinutes = scheduleEvent.time.hour * 60 + scheduleEvent.time.minute;
 
-			int startMovingMinutes = eventMinutes - (int)travelTimeInMinutes;
+		float startMovingMinutes = eventMinutes - travelTimeInMinutes;
+        startMovingMinutes = Mathf.Floor(startMovingMinutes);
 
-			return currentMinutes >= startMovingMinutes;
+		bool returnBool = currentMinutes >= startMovingMinutes;
+
+		return returnBool;
 	}
 
 	private void PrepareNPCForNextEvent(Student student, ScheduleEvent scheduleEvent, GameTimestamp currentTime) {
@@ -101,17 +112,28 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 
 		int currentMinutes = currentTime.hour * 60 + currentTime.minute;
 		int eventMinutes = scheduleEvent.time.hour * 60 + scheduleEvent.time.minute;
-		int availableMinutes = eventMinutes - currentMinutes;
 
-		if (availableMinutes >= 0 && !student.IsDead) {
+        Vector3 currentPosition = navAgent.transform.position;
+        float distance = Vector3.Distance(currentPosition, targetPosition);
+        float travelTimeInSeconds = distance / walkingSpeed;
+        float travelTimeInMinutes = travelTimeInSeconds * TimeManager.Instance.timeScale;
+
+        float startMovingMinutes = eventMinutes - travelTimeInMinutes;
+        startMovingMinutes = Mathf.Floor(startMovingMinutes);
+
+
+        if (currentMinutes >= startMovingMinutes && !student.IsDead) {
 			navAgent.SetDestination(targetPosition);
-
+			student.isMoving = true;
 			navAgent.speed = walkingSpeed;
-			npcInstance.transform.eulerAngles = scheduleEvent.facing;
 		}
 		else {
 			//Debug.Log("$\"NPC {student.name} cannot start moving yet. Waiting for the event time.\");");
 		}
+		if (currentMinutes == eventMinutes) {
+			student.isMoving = false;
+			student.facingDir = scheduleEvent.facing;
+        }
 	}
 	#endregion
 
