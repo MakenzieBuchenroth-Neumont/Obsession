@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -77,5 +78,12 @@ public class GameTimestamp {
 	//Years to Days
 	public static int yearsToDays(int years) {
 		return years * 4 * 30;
+	}
+
+	public static bool Compare(GameTimestamp a, GameTimestamp b) {
+		int timea = (a.hour * 60) + a.minute;
+		int timeb = (b.hour * 60) + b.minute;
+
+		return (timea <= timeb);
 	}
 }

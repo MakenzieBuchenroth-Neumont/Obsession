@@ -36,7 +36,19 @@ public class NPCInteractable : MonoBehaviour, IInteractable {
 		}
 	}
 
-	private void talkToNPC() {
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Door"))
+        {
+            DoorPrompt prompt = other.GetComponent<DoorPrompt>();
+            if (prompt != null && !prompt.isDoorOpened())
+            {
+                prompt.toggleDoor();
+            }
+        }
+    }
+
+    private void talkToNPC() {
 		UIManager.Instance.hideInteractionPrompt();
 		GameObject dialogueBox = DialogueManager.Instance.dialogueBox;
 		if (dialogueBox != null) {

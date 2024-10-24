@@ -12,7 +12,11 @@ public class Student : ScriptableObject {
 	[SerializeField] private StudentClassType studentClass;
 	[SerializeField] private Sprite studentImage;
 	[SerializeField] public GameObject prefab;
+	[Header("Schedules")]
+	[SerializeField] public NPCScheduleData myScheduleData;
 	[SerializeField] public Vector3 spawnPoint;
+	[SerializeField] public GameObject Locker;
+	[SerializeField] public GameObject Seat;
 
 	[Header("Dialogue and Quest")]
 	public Quest quest;
@@ -42,7 +46,6 @@ public class Student : ScriptableObject {
 	public string[] AskLines => askLines;
 	public string[] QuestLines => questLines;
 	public string[] GoodbyeLines => goodbyeLines;
-
 
 	public enum studentYear {
 		One = 1,
@@ -102,4 +105,15 @@ public class Student : ScriptableObject {
 			audio.Play();
 		}
 	}
+
+	public Vector3 getTargetPosition(ScheduleEvent.Locations locationEnum) {
+        switch (locationEnum)
+        {
+            default:
+            case ScheduleEvent.Locations.Locker:
+                return Locker.transform.position;
+            case ScheduleEvent.Locations.Seat:
+                return Seat.transform.position;
+        }
+    }
 }

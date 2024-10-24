@@ -14,6 +14,12 @@ public class ScheduleEvent {
     public bool factorDate;
 
     [Header("Position")]
-    public Vector3 coord;
+    public Locations location;
     public Vector3 facing;
+
+    public enum Locations
+    {
+        Locker,
+        Seat,
+    }
 }

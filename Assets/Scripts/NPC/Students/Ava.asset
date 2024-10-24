@@ -18,7 +18,10 @@ MonoBehaviour:
   studentClass: 5
   studentImage: {fileID: 21300000, guid: e4073c15d26044b428594a714a1ca397, type: 3}
   prefab: {fileID: 8447328502359583267, guid: 248da5295178c824ca528ef8122545c7, type: 3}
+  myScheduleData: {fileID: 11400000, guid: fe2fdfbcc8f87144fba41583c6cdc32b, type: 2}
   spawnPoint: {x: 8.561201, y: 0.002856851, z: -4.936}
+  Locker: {fileID: 0}
+  Seat: {fileID: 0}
   quest: {fileID: 11400000, guid: 177257ff5b0e075409feb32ff02706bc, type: 2}
   dialogueLines:
   - Hello!

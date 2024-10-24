@@ -14,17 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   student: {fileID: 11400000, guid: 173004b73e5af7740a99d1be8ae03b45, type: 2}
   npcScheduleList:
-  - name: Arrive at School
-    time:
-      day: 0
-      hour: 8
-      minute: 2
-    dayOfTheWeek: 1
-    priority: 0
-    ignoreDayOfTheWeek: 1
-    factorDate: 0
-    coord: {x: 14.29, y: 0.25, z: -6.49}
-    facing: {x: 0, y: -90, z: 0}
   - name: Head to Class
     time:
       day: 0
@@ -34,7 +23,7 @@ MonoBehaviour:
     priority: 0
     ignoreDayOfTheWeek: 1
     factorDate: 0
-    coord: {x: 0.2, y: 0.25, z: -6.409}
+    location: 0
     facing: {x: 0, y: 0, z: 0}
   - name: Arrive at Class
     time:
@@ -45,5 +34,16 @@ MonoBehaviour:
     priority: 0
     ignoreDayOfTheWeek: 1
     factorDate: 0
-    coord: {x: -0.96, y: 0.25, z: 0.68}
+    location: 1
+    facing: {x: 0, y: 0, z: 0}
+  - name: Arrive at Class
+    time:
+      day: 0
+      hour: 18
+      minute: 0
+    dayOfTheWeek: 1
+    priority: 0
+    ignoreDayOfTheWeek: 1
+    factorDate: 0
+    location: 0
     facing: {x: 0, y: 0, z: 0}

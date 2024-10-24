@@ -7,7 +7,6 @@ using static UnityEngine.Rendering.VolumeComponent;
 
 public class NPCManager : MonoBehaviour, ITimeTracker {
 
-	public List<NPCScheduleData> npcSchedules;
 	private Dictionary<Student, GameObject> npcInstances = new Dictionary<Student, GameObject>();
 	private Dictionary<Student, Vector3> npcDestinations = new Dictionary<Student, Vector3>();
 	private Dictionary<Student, float> npcSpeeds = new Dictionary<Student, float>();
@@ -25,64 +24,27 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 
 		DontDestroyOnLoad(this.gameObject);
 
-		foreach (var schedule in npcSchedules) {
-			Debug.Log($"Spawning NPC: {schedule.student.name}. IsDead: {schedule.student.IsDead}");
-			if (schedule.student != null && schedule.student.prefab != null && !schedule.student.IsDead) {
-				Animator anim = schedule.student.prefab.GetComponent<Animator>();
-				if (anim != null) {
-					anim.enabled = true;
-					Rigidbody[] rb = GetComponentsInChildren<Rigidbody>();
-					foreach (Rigidbody body in rb) {
-						body.isKinematic = false;
-					}
-					GameObject npcInstance = Instantiate(schedule.student.prefab);
-					npcInstance.transform.position = schedule.student.spawnPoint;
-					npcInstances[schedule.student] = npcInstance;
-
-					var navAgent = npcInstance.GetComponent<NavMeshAgent>();
-					if (navAgent == null) {
-						navAgent = npcInstance.AddComponent<NavMeshAgent>();
-					}
-					navAgent.speed = walkingSpeed;
-
-					isWeaponPickupInProgress[schedule.student] = false;
-				}
-			}
-		}
 	}
 
 	public void Update() {
-		List<Student> arrivedStudents = new List<Student>();
-		foreach (var kvp in npcDestinations) {
-			Student student = kvp.Key;
-			Vector3 destination = kvp.Value;
-			GameObject npcInstance = npcInstances[student];
-			NavMeshAgent navAgent = npcInstance.GetComponent<NavMeshAgent>();
-
-			if (navAgent.remainingDistance < 0.1f && !navAgent.pathPending && !student.IsDead) {
-				arrivedStudents.Add(student);
-			}
-		}
-
-		foreach (Student student in arrivedStudents) {
-			npcDestinations.Remove(student);
-		}
 	}
 	#endregion
 
 	public void clockUpdate(GameTimestamp timestamp) {
-		foreach (var npcSchedule in npcSchedules) {
-			foreach (var scheduleEvent in npcSchedule.npcScheduleList) {
-				if (ShouldNPCStartMoving(npcSchedule.student, scheduleEvent, timestamp)) {
-					PrepareNPCForNextEvent(npcSchedule.student, scheduleEvent, timestamp);
-				}
+		foreach(KeyValuePair<Student, GameObject> student in npcInstances)
+		{
+			ScheduleEvent scheduleEvent = new ScheduleEvent();
+			if (ShouldNPCStartMoving(student.Key, student.Key.myScheduleData, timestamp, out scheduleEvent)){
+				PrepareNPCForNextEvent(student.Key, scheduleEvent, timestamp);
 			}
 		}
 	}
 
 	#region NPC Movement
-	private bool ShouldNPCStartMoving(Student student, ScheduleEvent scheduleEvent, GameTimestamp currentTime) {
-		if (student == null) {
+	private bool ShouldNPCStartMoving(Student student, NPCScheduleData scheduleData, GameTimestamp currentTime, out ScheduleEvent scheduleEvent) {
+		scheduleEvent = new ScheduleEvent();
+
+        if (student == null) {
 			Debug.LogWarning("One of the required objects in 'ShouldNPCStartMoving' is null.");
 			return false;
 		}
@@ -102,13 +64,25 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 			return false;
 		}
 
-		if (!student.IsDead) {
+		if (student.IsDead) {
 			Debug.LogWarning($"{student} is dead. Can't move!");
+			return false;
+		}
+		foreach (ScheduleEvent testScheduleEvent in scheduleData.npcScheduleList)
+		{
+			if (GameTimestamp.Compare(currentTime, testScheduleEvent.time)) {
+				scheduleEvent = testScheduleEvent;
+				break;
+			}
+		}
+		if (scheduleEvent.time == null)
+		{
+			return false;
 		}
 			Vector3 currentPosition = navAgent.transform.position;
-			Vector3 targetPosition = scheduleEvent.coord;
+			Vector3 targetPosition = student.getTargetPosition(scheduleEvent.location);
 
-			float distance = Vector3.Distance(currentPosition, targetPosition);
+        float distance = Vector3.Distance(currentPosition, targetPosition);
 			float travelTimeInSeconds = distance / walkingSpeed;
 			float travelTimeInMinutes = travelTimeInSeconds / 60;
 
@@ -123,7 +97,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 	private void PrepareNPCForNextEvent(Student student, ScheduleEvent scheduleEvent, GameTimestamp currentTime) {
 		GameObject npcInstance = npcInstances[student];
 		NavMeshAgent navAgent = npcInstance.GetComponent<NavMeshAgent>();
-		Vector3 targetPosition = scheduleEvent.coord;
+		Vector3 targetPosition = student.getTargetPosition(scheduleEvent.location)  ;
 
 		int currentMinutes = currentTime.hour * 60 + currentTime.minute;
 		int eventMinutes = scheduleEvent.time.hour * 60 + scheduleEvent.time.minute;
@@ -223,16 +197,8 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		}
 		else {
 			Debug.Log($"{student.name} has no quest available.");
+			// TODO: tell the player there is no available quest
 		}
-	}
-
-	private void OnTriggerEnter(Collider other) {
-		if (other.CompareTag("Door")) {
-			DoorPrompt prompt = other.GetComponent<DoorPrompt>();
-            if (prompt != null && !prompt.isDoorOpened()) {
-				prompt.toggleDoor();
-            }
-        }
 	}
 		
 	public void handleNPCStab(Student stabbedStudent) {

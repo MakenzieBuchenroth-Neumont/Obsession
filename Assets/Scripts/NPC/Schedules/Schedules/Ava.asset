@@ -23,7 +23,7 @@ MonoBehaviour:
     priority: 0
     ignoreDayOfTheWeek: 1
     factorDate: 0
-    coord: {x: 15.988, y: 0.01142241, z: -4.936}
+    location: 0
     facing: {x: 0, y: -180, z: 0}
   - name: Make it to the stairs
     time:
@@ -34,5 +34,16 @@ MonoBehaviour:
     priority: 0
     ignoreDayOfTheWeek: 1
     factorDate: 0
-    coord: {x: 16.541, y: 0.01142241, z: -4.936}
+    location: 1
+    facing: {x: 0, y: -270, z: 0}
+  - name: Exit
+    time:
+      day: 0
+      hour: 18
+      minute: 0
+    dayOfTheWeek: 1
+    priority: 0
+    ignoreDayOfTheWeek: 1
+    factorDate: 0
+    location: 0
     facing: {x: 0, y: -270, z: 0}

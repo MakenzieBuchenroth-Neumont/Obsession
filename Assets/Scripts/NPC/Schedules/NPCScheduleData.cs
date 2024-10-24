@@ -6,4 +6,6 @@ using UnityEngine;
 public class NPCScheduleData : ScriptableObject {
     public Student student;
     public List<ScheduleEvent> npcScheduleList;
+
+
 }
