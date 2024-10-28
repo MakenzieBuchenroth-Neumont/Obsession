@@ -22,14 +22,14 @@ public class QTEManager : MonoBehaviour {
 		}
 	}
 
-	public void StartQTE(string button, float duration) {
+	public void StartQTE(KeyCode button, float duration, NPCInteractable interactable) {
 		if (qteCoroutine != null) {
 			StopCoroutine(qteCoroutine);
 		}
-		qteCoroutine = StartCoroutine(QTECoroutine(KeyCode.U, duration));
+		qteCoroutine = StartCoroutine(QTECoroutine(button, duration, interactable));
 	}
 
-	private IEnumerator QTECoroutine(KeyCode keyCode, float duration) {
+	private IEnumerator QTECoroutine(KeyCode keyCode, float duration, NPCInteractable interactable) {
 		qtePanel.SetActive(true);
 		float time = 0;
 
@@ -38,19 +38,18 @@ public class QTEManager : MonoBehaviour {
 			progressBar.fillAmount = time / duration;
 
             if (Input.GetKeyDown((keyCode))) {
-				EndQTE(true);
+				EndQTE(true, interactable);
 				yield break;
 			}
 			yield return null;
         }
-		EndQTE(false);
+		EndQTE(false, interactable);
 	}
 
-	private void EndQTE(bool success) {
+	private void EndQTE(bool success, NPCInteractable interactable) {
 		qtePanel.SetActive(false);
 		progressBar.fillAmount = 0;
 
-			var interactable = FindObjectOfType<NPCInteractable>();
 		if (success) {
 			if (interactable != null) {
 				interactable.handleQTESuccess();

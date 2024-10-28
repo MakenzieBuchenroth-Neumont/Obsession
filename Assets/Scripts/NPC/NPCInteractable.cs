@@ -3,90 +3,128 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class NPCInteractable : MonoBehaviour, IInteractable {
-	public Student studentData;
+    public Student studentData;
 
-	private GameObject dialogueBox;
+    private GameObject dialogueBox;
 
-	private void Start() {
-		dialogueBox = FindDialogueBoxInDontDestroyOnLoad();
+    public CapsuleCollider mainCollider;
+    public GameObject rig;
+    public Animator anim;
 
-		if (dialogueBox != null) {
-			dialogueBox.SetActive(false);
-		}
-	}
+    Collider[] ragdollColliders;
+    Rigidbody[] ragdollRigidbodies;
 
-	private GameObject FindDialogueBoxInDontDestroyOnLoad() {
-		return GameObject.FindGameObjectWithTag("DialogueBox");
-	}
+    private void Start() {
+        getRagdollBits();
+        if (!studentData.IsDead) {
+            ragdollOff();
+        }
+        dialogueBox = FindDialogueBoxInDontDestroyOnLoad();
 
-	public void interact(PlayerInteract player) {
-		Vector3 directionToNPC = (player.transform.position - transform.position).normalized;
-		float dotProduct = Vector3.Dot(transform.forward, directionToNPC);
+        if (dialogueBox != null) {
+            dialogueBox.SetActive(false);
+        }
+    }
 
-		if (dotProduct > 0.5f) {
-			UIManager.Instance.showInteractionPrompt("Talk");
-			talkToNPC();
-		}
-		else if (dotProduct < -0.5f && player.hasWeapon) {
-			UIManager.Instance.showInteractionPrompt("Stab");
-			stab();
-		}
-		else if (dotProduct < -0.5f && !player.hasWeapon) {
-			talkToNPC();
-		}
-	}
+    private GameObject FindDialogueBoxInDontDestroyOnLoad() {
+        return GameObject.FindGameObjectWithTag("DialogueBox");
+    }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Door"))
-        {
+    public void interact(PlayerInteract player) {
+        Vector3 directionToNPC = (player.transform.position - transform.position).normalized;
+        float dotProduct = Vector3.Dot(transform.forward, directionToNPC);
+
+        if (dotProduct > 0.5f) {
+            UIManager.Instance.showInteractionPrompt("Talk");
+            talkToNPC();
+        }
+        else if (dotProduct < -0.5f && player.hasWeapon) {
+            UIManager.Instance.showInteractionPrompt("Stab");
+            stab();
+        }
+        else if (dotProduct < -0.5f && !player.hasWeapon) {
+            talkToNPC();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Door")) {
             DoorPrompt prompt = other.GetComponent<DoorPrompt>();
-            if (prompt != null && !prompt.isDoorOpened())
-            {
+            if (prompt != null && !prompt.isDoorOpened()) {
                 prompt.toggleDoor();
             }
         }
     }
 
     private void talkToNPC() {
-		UIManager.Instance.hideInteractionPrompt();
-		GameObject dialogueBox = DialogueManager.Instance.dialogueBox;
-		if (dialogueBox != null) {
-			dialogueBox.SetActive(true);
-			if (dialogueBox.TryGetComponent(out Dialogue dialogue)) {
-				dialogue.studentData = studentData;
-				if (studentData.DialogueLines.Length > 0) {
-					dialogue.startDialogue(studentData.DialogueLines);
-				}
-				else {
-					Debug.LogWarning("No dialogue lines assigned.");
-				}
-			}
-		}
-		else {
-			Debug.LogError("DialogueBox is null in talkToNPC().");
-		}
-	}
+        UIManager.Instance.hideInteractionPrompt();
+        GameObject dialogueBox = DialogueManager.Instance.dialogueBox;
+        if (dialogueBox != null) {
+            dialogueBox.SetActive(true);
+            if (dialogueBox.TryGetComponent(out Dialogue dialogue)) {
+                dialogue.studentData = studentData;
+                if (studentData.DialogueLines.Length > 0) {
+                    dialogue.startDialogue(studentData.DialogueLines);
+                }
+                else {
+                    Debug.LogWarning("No dialogue lines assigned.");
+                }
+            }
+        }
+        else {
+            Debug.LogError("DialogueBox is null in talkToNPC().");
+        }
+    }
 
-	private void stab() {
-		UIManager.Instance.hideInteractionPrompt();
-		startStabQTE();
-	}
+    private void stab() {
+        UIManager.Instance.hideInteractionPrompt();
+        startStabQTE();
+    }
 
-	private void startStabQTE() {
-		KeyCode stabKey = KeyCode.U;
-		QTEManager qTEManager = FindObjectOfType<QTEManager>();
-		if (qTEManager != null) {
-			qTEManager.StartQTE("U",3f);
-			Debug.Log("QTE started for stabbing.");
-		}
-	}
+    private void startStabQTE() {
+        KeyCode stabKey = KeyCode.U;
+        QTEManager qTEManager = FindObjectOfType<QTEManager>();
+        if (qTEManager != null) {
+            qTEManager.StartQTE(stabKey, 1f, this);
+            Debug.Log("QTE started for stabbing.");
+        }
+    }
 
-	public void handleQTESuccess() {
-		Debug.Log("NPC has been stabbed.");
-	}
+    public void handleQTESuccess() {
+        Debug.Log("NPC has been stabbed.");
+        ragdollOn();
+    }
 
-	public void handleQTEFailure() {
-		Debug.Log("You got caught.");
-	}
+    public void handleQTEFailure() {
+        Debug.Log("You got caught.");
+    }
+
+    public void ragdollOn() {
+        foreach (Collider collider in ragdollColliders) {
+            collider.enabled = true;
+        }
+        foreach (Rigidbody rb in ragdollRigidbodies) {
+            rb.isKinematic = false;
+        }
+        anim.enabled = false;
+        mainCollider.enabled = false;
+        GetComponent<Rigidbody>().isKinematic = true;
+    }
+
+    public void ragdollOff() {
+        foreach (Collider collider in ragdollColliders) {
+            collider.enabled = false;
+        }
+        foreach (Rigidbody rb in ragdollRigidbodies) {
+            rb.isKinematic = true;
+        }
+        anim.enabled = true;
+        mainCollider.enabled = true;
+        GetComponent<Rigidbody>().isKinematic = false;
+    }
+
+    public void getRagdollBits() {
+        ragdollColliders = rig.GetComponentsInChildren<Collider>();
+        ragdollRigidbodies = rig.GetComponentsInChildren<Rigidbody>();
+    }
 }
