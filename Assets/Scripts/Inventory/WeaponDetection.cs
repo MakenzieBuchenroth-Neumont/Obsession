@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class WeaponDetection : MonoBehaviour {
 	public float detectionRadius = 5f;
 	public float detectionAngle = 90f;
@@ -24,7 +25,7 @@ public class WeaponDetection : MonoBehaviour {
 		npcAnimator = GetComponent<Animator>();
 		//audioSource = GetComponent<AudioSource>
 
-		if (npcManager == null || inventoryManager == null || npcAnimator == null) {
+		if (npcManager == null || inventoryManager == null) {
 			Debug.LogError("Required component missing!");
 		}
 		/*if (audioSource == null) {

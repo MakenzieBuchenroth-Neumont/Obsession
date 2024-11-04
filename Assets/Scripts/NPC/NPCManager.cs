@@ -229,7 +229,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 
 	public void handleWeaponThreat(GameObject npc) {
 		Student student = findStudentByNPC(npc);
-		if (student != null) {
+		if (student != null && !student.IsDead) {
 			student.reactToWeapon();
 		}
 	}

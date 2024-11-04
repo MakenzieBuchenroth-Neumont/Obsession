@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour {
 	public bool walking;
 	public Transform playerTrans;
 
+	public static bool isCrawling = false;
+
 	private void FixedUpdate() {
 		if (Input.GetKey(KeyCode.W)) {
 			rb.velocity = transform.forward * walkingSpeed * Time.deltaTime;
@@ -46,7 +48,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetKey(KeyCode.D)) {
 			playerTrans.Rotate(0, roSpeed * Time.deltaTime, 0);
 		}
-		if (walking == true) {
+		if (walking == true && isCrawling == false) {
 			if (Input.GetKeyDown(KeyCode.LeftShift)) {
 				walkingSpeed = walkingSpeed + runSpeed;
 				animator.SetTrigger("run");
@@ -56,6 +58,17 @@ public class PlayerMovement : MonoBehaviour {
 				walkingSpeed = olwSpeed;
 				animator.ResetTrigger("run");
 				animator.SetTrigger("walk");
+			}
+		}
+
+		if (walking == false && Input.GetKeyUp(KeyCode.LeftControl)) {
+			if (isCrawling == false) {
+				animator.SetBool("crawl", true);
+				isCrawling = true;
+			}
+			else if (isCrawling == true) {
+				animator.SetBool("crawl", false);
+				isCrawling = false;
 			}
 		}
 	}
