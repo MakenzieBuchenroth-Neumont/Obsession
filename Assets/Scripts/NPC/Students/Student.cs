@@ -12,6 +12,7 @@ public class Student : ScriptableObject {
 	[SerializeField] private StudentClassType studentClass;
 	[SerializeField] private Sprite studentImage;
 	[SerializeField] public GameObject prefab;
+	[SerializeField] public Animator anim;
 	[Header("Schedules")]
 	[SerializeField] public NPCScheduleData myScheduleData;
 	[SerializeField] public Vector3 spawnPoint;
@@ -92,31 +93,16 @@ public class Student : ScriptableObject {
 	}
 
 	public void reactToWeapon() {
-		if (IsDead) {
-			Debug.Log($"{name} cannot react because they are dead.");
-		};
-
-		Debug.Log($"{name} saw you carrying a weapon!");
-
-		Animator anim = prefab.GetComponent<Animator>();
-		if (anim != null) {
-			anim.SetTrigger("WeaponReact");
-		}
-
-		AudioSource audio = prefab.GetComponent<AudioSource>();
-		if (audio != null) {
-			audio.Play();
-		}
+		GameManager.Instance.gameOver();
 	}
 
 	public Vector3 getTargetPosition(ScheduleEvent.Locations locationEnum) {
-        switch (locationEnum)
-        {
-            default:
-            case ScheduleEvent.Locations.Locker:
-                return Locker.transform.position;
-            case ScheduleEvent.Locations.Seat:
-                return Seat.transform.position;
-        }
-    }
+		switch (locationEnum) {
+			default:
+			case ScheduleEvent.Locations.Locker:
+				return Locker.transform.position;
+			case ScheduleEvent.Locations.Seat:
+				return Seat.transform.position;
+		}
+	}
 }

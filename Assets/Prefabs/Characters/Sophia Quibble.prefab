@@ -1133,6 +1133,11 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 153ce38e4512a894cac9e69a21d09bad, type: 2}
+    - target: {fileID: 6974521556414156317, guid: be3f2b3e6e6cda444ab4b99e08a962b0,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6974521556434623927, guid: be3f2b3e6e6cda444ab4b99e08a962b0,
         type: 3}
       propertyPath: m_BlendShapeWeights.Array.size
@@ -1909,8 +1914,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88daa290bd8f85444b5e894fc1f1e6da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 1
+  detectionRadius: 3
   detectionAngle: 90
+  student: {fileID: 11400000, guid: 173004b73e5af7740a99d1be8ae03b45, type: 2}
   npcReactVoiceLine: {fileID: 0}
 --- !u!114 &-8416128514487941652
 MonoBehaviour:

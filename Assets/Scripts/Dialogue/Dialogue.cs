@@ -15,9 +15,11 @@ public class Dialogue : MonoBehaviour {
 	private string[] currentLines;
 	private bool isGoodbyeDialogue = false;
 	private bool isTyping = false;
+	public GameObject parent;
 
 	private void Start() {
 		npcManager = FindObjectOfType<NPCManager>();
+		parent = GetComponentInParent<Attachment>(true).gameObject;
 	}
 
 	private void Update() {

@@ -11,7 +11,7 @@ public class WeaponDetection : MonoBehaviour {
 
 	[Header("Required Scripts")]
 	private NPCManager npcManager;
-	private Student student;
+	public Student student;
 	private InventoryManager inventoryManager;
 	private Animator npcAnimator;
 	public AudioClip npcReactVoiceLine;
@@ -41,7 +41,9 @@ public class WeaponDetection : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		detectWeaponsInVisionCone();
+		if (!student.IsDead) {
+			detectWeaponsInVisionCone();
+		}
 	}
 
 	private void detectWeaponsInVisionCone() {
@@ -52,6 +54,12 @@ public class WeaponDetection : MonoBehaviour {
 				DroppableItem droppableItem = col.GetComponent<DroppableItem>();
 				if (droppableItem != null && droppableItem.itemData.isWeapon) {
 					if (student != null & npcManager != null) {
+						//npcManager?.handleWeaponThreat(this.gameObject);
+					}
+				}
+				WeaponDetection otherStudent = col.GetComponentInParent<WeaponDetection>();
+				if (otherStudent != null) {
+					if (otherStudent.student.IsDead) {
 						npcManager?.handleWeaponThreat(this.gameObject);
 					}
 				}

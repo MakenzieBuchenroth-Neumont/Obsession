@@ -125,6 +125,8 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
         if (currentMinutes >= startMovingMinutes && !student.IsDead) {
 			navAgent.SetDestination(targetPosition);
 			student.isMoving = true;
+			student.anim.enabled = true;
+			student.anim.SetBool("Walking", true);//
 			navAgent.speed = walkingSpeed;
 		}
 		else {
@@ -132,6 +134,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		}
 		if (currentMinutes == eventMinutes) {
 			student.isMoving = false;
+			student.anim.SetBool("Walking", false);
 			student.facingDir = scheduleEvent.facing;
         }
 	}

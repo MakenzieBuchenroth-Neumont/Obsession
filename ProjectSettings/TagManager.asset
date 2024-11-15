@@ -11,6 +11,7 @@ TagManager:
   - Classroom
   - Bed
   - DialogueBox
+  - MAST_Holder
   layers:
   - Default
   - TransparentFX

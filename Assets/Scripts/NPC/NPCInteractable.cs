@@ -37,14 +37,17 @@ public class NPCInteractable : MonoBehaviour, IInteractable {
         if (dotProduct > 0.5f) {
             UIManager.Instance.showInteractionPrompt("Talk");
             talkToNPC();
+            anim.SetBool("Walking", false);
         }
         else if (dotProduct < -0.5f && player.hasWeapon) {
             UIManager.Instance.showInteractionPrompt("Stab");
             stab();
-        }
+			anim.SetBool("Walking", false);
+		}
         else if (dotProduct < -0.5f && !player.hasWeapon) {
             talkToNPC();
-        }
+			anim.SetBool("Walking", false);
+		}
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -64,7 +67,8 @@ public class NPCInteractable : MonoBehaviour, IInteractable {
             if (dialogueBox.TryGetComponent(out Dialogue dialogue)) {
                 dialogue.studentData = studentData;
                 if (studentData.DialogueLines.Length > 0) {
-                    dialogue.startDialogue(studentData.DialogueLines);
+					dialogue.parent.SetActive(true);
+					dialogue.startDialogue(studentData.DialogueLines);
                 }
                 else {
                     Debug.LogWarning("No dialogue lines assigned.");
@@ -92,6 +96,7 @@ public class NPCInteractable : MonoBehaviour, IInteractable {
 
     public void handleQTESuccess() {
         Debug.Log("NPC has been stabbed.");
+        studentData.IsDead = true;
         ragdollOn();
     }
 

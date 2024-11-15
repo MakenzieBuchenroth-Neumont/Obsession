@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 	// time ui
 	public TextMeshProUGUI timeText;
 	public TextMeshProUGUI dateText;
+	public TextMeshProUGUI scheduleBlockText;
 
 	[Header("Inventory System")]
 	// the inventory panel
@@ -115,6 +116,7 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 		//Get the hours and minutes
 		int hours = timestamp.hour;
 		int minutes = timestamp.minute;
+		var scheduleBlock = timestamp.scheduleBlock;
 
 		//AM or PM
 		string prefix = "AM ";
@@ -146,6 +148,9 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 
 		// format
 		dateText.text = dayOfTheWeek;
+
+
+		scheduleBlockText.text = scheduleBlock.ToString();
 	}
 
 	#region Interaction Prompt

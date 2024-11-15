@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 		if (Input.GetKey(KeyCode.S)) {
 			rb.velocity = -transform.forward * walkBackwardsSpeed * Time.deltaTime;
 		}
+
 	}
 
 	// Update is called once per frame

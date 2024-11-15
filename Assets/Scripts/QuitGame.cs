@@ -7,6 +7,7 @@ public class QuitGame : MonoBehaviour {
 	[SerializeField] GameObject player;
 	[SerializeField] GameObject manager;
 	[SerializeField] GameObject canvas;
+
 	public void quitButton() {
 		GameManager.gameMode = GameManager.GameMode.Title;
 		GameObject.Destroy(player);

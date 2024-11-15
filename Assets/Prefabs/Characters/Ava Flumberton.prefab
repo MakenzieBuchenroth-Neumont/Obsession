@@ -1134,6 +1134,16 @@ PrefabInstance:
       propertyPath: m_TagString
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 6974521556414156317, guid: be3f2b3e6e6cda444ab4b99e08a962b0,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 153ce38e4512a894cac9e69a21d09bad, type: 2}
+    - target: {fileID: 6974521556414156317, guid: be3f2b3e6e6cda444ab4b99e08a962b0,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6974521556434623927, guid: be3f2b3e6e6cda444ab4b99e08a962b0,
         type: 3}
       propertyPath: m_Materials.Array.data[6]
@@ -1710,6 +1720,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1580916178722890815}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8447328502208348065 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6974521556397136798, guid: be3f2b3e6e6cda444ab4b99e08a962b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1580916178722890815}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8447328502359583266 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6974521556414156317, guid: be3f2b3e6e6cda444ab4b99e08a962b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 1580916178722890815}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8447328502359583267 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6974521556414156316, guid: be3f2b3e6e6cda444ab4b99e08a962b0,
@@ -1778,7 +1800,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88daa290bd8f85444b5e894fc1f1e6da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRadius: 1
+  detectionRadius: 3
+  detectionAngle: 250
+  student: {fileID: 11400000, guid: 98ca298cf2f7d5c43a1b24996d101939, type: 2}
+  npcReactVoiceLine: {fileID: 0}
 --- !u!114 &2349657404984148596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1792,6 +1817,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   studentData: {fileID: 11400000, guid: 98ca298cf2f7d5c43a1b24996d101939, type: 2}
+  mainCollider: {fileID: -5510423027065456753}
+  rig: {fileID: 8447328502208348065}
+  anim: {fileID: 8447328502359583266}
 --- !u!1001 &1912060934122081787
 PrefabInstance:
   m_ObjectHideFlags: 0
