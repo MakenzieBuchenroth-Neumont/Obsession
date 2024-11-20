@@ -18,14 +18,6 @@ public class GameTimestamp {
 		Saturday
 	}
 
-	public enum ScheduleBlock {
-		BeforeClass,
-		Class,
-		Lunch,
-		AfterClass,
-		Evening
-	}
-
 	public int day;
 	public int hour;
 	public int minute;
@@ -33,8 +25,6 @@ public class GameTimestamp {
 	[SerializeField] public GameObject playerTransform;
 	[SerializeField] public GameObject mainCamera;
 	[SerializeField] public GameObject bedroomCamera;
-
-	public ScheduleBlock scheduleBlock;
 
 	//Constructor to set up the class
 	public GameTimestamp(int day, int hour, int minute) {
@@ -93,25 +83,6 @@ public class GameTimestamp {
 		// 1 - 3: class
 		// 3 - 5:59: after class
 		// 6 - 11:59: evening*/
-		
-		if (hour > 0 && (hour == 7 && minute == 59)) {
-			scheduleBlock = ScheduleBlock.BeforeClass;
-		}
-		else if (hour > 8 || hour < 12) {
-			scheduleBlock = ScheduleBlock.Class;
-		}
-		else if ((hour == 12 && minute >= 59)) {
-			scheduleBlock = ScheduleBlock.Lunch;
-		}
-		else if (hour > 1 && hour < 3) {
-			scheduleBlock = ScheduleBlock.Class;
-		}
-		else if (hour > 3 && hour < 6) {
-			scheduleBlock = ScheduleBlock.AfterClass;
-		}
-		else {
-			scheduleBlock = ScheduleBlock.Evening;
-		}
 
 		if (hour == 18) {
 			playerTransform.transform.position = new Vector3(161.856f, 0, .914f);

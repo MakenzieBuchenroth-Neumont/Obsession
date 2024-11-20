@@ -20,7 +20,7 @@ MonoBehaviour:
   prefab: {fileID: 3157075755909196197, guid: 404cb6ff932db7543a6b35c89026af27, type: 3}
   anim: {fileID: 3157075755909196196, guid: 404cb6ff932db7543a6b35c89026af27, type: 3}
   myScheduleData: {fileID: 11400000, guid: ad5f4f59404b5564bb45ae89b592a3ef, type: 2}
-  spawnPoint: {x: 14.29, y: 0.25, z: -6.49}
+  spawnPoint: {x: 7.568715, y: -0.872, z: 23.767}
   Locker: {fileID: 0}
   Seat: {fileID: 0}
   quest: {fileID: 11400000, guid: b02a05620f5b7884db69578d8fe1a090, type: 2}
@@ -36,4 +36,4 @@ MonoBehaviour:
   goodbyeLines:
   - Bye...
   isMoving: 0
-  facingDir: {x: 0, y: 0, z: 0}
+  facingDir: {x: 0, y: 180, z: 0}
