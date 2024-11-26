@@ -28,14 +28,29 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 	}
 
 	public void Update() {
-        foreach (KeyValuePair<Student, GameObject> student in npcInstances) {
-			if (!student.Key.isMoving) {
-				// TO_DO: FIX LERP SO THEY SPIN THE SHORT WAY
-				Vector3 vec = Vector3.Lerp(student.Value.transform.rotation.eulerAngles, student.Key.facingDir, Time.deltaTime);
-				student.Value.transform.rotation = Quaternion.Euler(vec);
+		foreach (KeyValuePair<Student, GameObject> student in npcInstances) {
+			GameObject npc = student.Value;
+			NavMeshAgent agent = npc.GetComponent<NavMeshAgent>();
+
+			if (student.Key.isMoving) {
+				if (agent.remainingDistance > agent.stoppingDistance) {
+					Vector3 direction = agent.velocity.normalized;
+					if (direction != Vector3.zero) {
+						Quaternion targetRotation = Quaternion.LookRotation(direction);
+						npc.transform.rotation = Quaternion.Slerp(npc.transform.rotation, targetRotation, Time.deltaTime * 5f);
+					}
+				}
 			}
-        }
-    }
+			else {
+				Vector3 targetDirection = student.Key.facingDir - npc.transform.position;
+				targetDirection.y = 0;
+				if (targetDirection != Vector3.zero) {
+					Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
+					npc.transform.rotation = Quaternion.Slerp(npc.transform.rotation, targetRotation, Time.deltaTime * 5f);
+				}
+			}
+		}
+	}
 	#endregion
 
 	public void clockUpdate(GameTimestamp timestamp) {
@@ -208,6 +223,8 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 				navAgent = npcInstance.AddComponent<NavMeshAgent>();
 			}
 			navAgent.speed = walkingSpeed;
+
+			navAgent.updateRotation = false;
 
 			isWeaponPickupInProgress[student] = false;
 		}
