@@ -54,7 +54,7 @@ public class WeaponDetection : MonoBehaviour {
 				DroppableItem droppableItem = col.GetComponent<DroppableItem>();
 				if (droppableItem != null && droppableItem.itemData.isWeapon) {
 					if (student != null & npcManager != null) {
-						//npcManager?.handleWeaponThreat(this.gameObject);
+						npcManager?.handleWeaponThreat(this.gameObject);
 					}
 				}
 				WeaponDetection otherStudent = col.GetComponentInParent<WeaponDetection>();

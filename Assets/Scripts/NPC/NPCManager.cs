@@ -134,6 +134,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 		}
 		if (currentMinutes == eventMinutes) {
 			student.isMoving = false;
+			student.anim.enabled = true;
 			student.anim.SetBool("Walking", false);
 			student.facingDir = scheduleEvent.facing;
         }

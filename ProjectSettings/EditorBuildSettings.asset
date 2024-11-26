@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FirstFloor.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Outside.unity
     guid: 7f226abdb83353649a83708dc1480eb1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SecondFloor.unity
     guid: 3a15f55aabd8e884c82e15a40494f91e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Bedroom.unity
     guid: 9afb3d7cfad515c4f9e6289f4aba3b3a
   m_configObjects: {}
