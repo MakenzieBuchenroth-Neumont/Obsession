@@ -6,7 +6,11 @@ using UnityEngine.AI;
 public class StudentSpawner : MonoBehaviour {
 	[SerializeField] private List<Student> studentsToSpawn;
 	[SerializeField] private List<GameObject> LockerLocations;
+	[SerializeField] private List<GameObject> BeforeClassLocations;
 	[SerializeField] private List<GameObject> SeatLocations;
+	[SerializeField] private List<GameObject> LunchLocations;
+	[SerializeField] private List<GameObject> AfterClassLocations;
+	[SerializeField] private List<GameObject> LeaveLocations;
 	[SerializeField] private NPCManager npcManager;
 
 	// Start is called before the first frame update

@@ -36,7 +36,7 @@ public class TimeManager : MonoBehaviour {
 		}
 	}
 	private void Start() {
-		timestamp = new GameTimestamp(1, 8, 0);
+		timestamp = new GameTimestamp(1, 7, 0);
 	}
 
 	private void startTimeUpdate() {

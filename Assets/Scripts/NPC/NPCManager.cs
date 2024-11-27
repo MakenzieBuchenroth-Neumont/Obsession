@@ -48,6 +48,7 @@ public class NPCManager : MonoBehaviour, ITimeTracker {
 					Quaternion targetRotation = Quaternion.LookRotation(targetDirection);
 					npc.transform.rotation = Quaternion.Slerp(npc.transform.rotation, targetRotation, Time.deltaTime * 5f);
 				}
+				student.Key.anim.SetBool("Walking", false);
 			}
 		}
 	}

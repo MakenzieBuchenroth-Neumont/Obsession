@@ -20,6 +20,10 @@ public class ScheduleEvent {
     public enum Locations
     {
         Locker,
+        BeforeClass,
         Seat,
+        Lunch,
+        AfterClass,
+        Leave
     }
 }
