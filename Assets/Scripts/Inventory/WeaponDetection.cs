@@ -32,7 +32,7 @@ public class WeaponDetection : MonoBehaviour {
 			Debug.LogError("No audioSource component found!");
 		}*/
 
-		student = npcManager.findStudentByNPC(gameObject);
+		//student = npcManager.findStudentByNPC(gameObject);
 
 		if (student == null) {
 			Debug.LogError("No Student reference found for this NPC.");

@@ -125,7 +125,6 @@ public class NPCInteractable : MonoBehaviour, IInteractable {
         }
         anim.enabled = true;
         mainCollider.enabled = true;
-        GetComponent<Rigidbody>().isKinematic = false;
     }
 
     public void getRagdollBits() {

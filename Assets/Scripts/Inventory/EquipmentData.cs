@@ -7,7 +7,8 @@ public class EquipmentData : ItemData {
 	public enum EquipmentType {
 		Knife,
 		Scissors,
-		Bat
+		Bat,
+		Hand
 	}
 	public EquipmentType equipmentType;
 
