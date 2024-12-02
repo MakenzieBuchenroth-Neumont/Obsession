@@ -34,17 +34,20 @@ public class InventoryManager : MonoBehaviour {
 	[Header("Player")]
 	// reference to the player's hand transform
 	public Transform playerHand;
+	public Rigidbody playerHandrb	;
 
 	private Dictionary<string, Vector3> toolPositions = new Dictionary<string, Vector3> {
 		{ "Knife", new Vector3(0.007f, 0.063f, 0.081f) }, // Adjust these values as needed
         { "Scissors", new Vector3(-0.095f, 0.12f, 0.038f) },
-		{ "BaseballBat", new Vector3(-0.095f, 0.112f, 0.386f) }
+		{ "BaseballBat", new Vector3(-0.095f, 0.112f, 0.386f) },
+		{ "Hand", new Vector3(-0.095f, 0.112f, 0.386f) }
 	};
 
 	private Dictionary<string, Quaternion> toolRotations = new Dictionary<string, Quaternion> {
 		{ "Knife", Quaternion.Euler(-98.917f, 45.451f, -155.636f) },
 		{ "Scissors", Quaternion.Euler(-11.779f, -99.472f, 135.209f) },
-		{ "BaseballBat", Quaternion.Euler(4.132f, -197.704f, -102.925f) }
+		{ "BaseballBat", Quaternion.Euler(4.132f, -197.704f, -102.925f) },
+		{ "Hand", Quaternion.Euler(4.132f, -197.704f, -102.925f) }
 	};
 
 	// the currently instantiated tool object

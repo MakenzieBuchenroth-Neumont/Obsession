@@ -32,6 +32,7 @@ public class DropItemHandling : MonoBehaviour {
 				InventoryManager.Instance.dropItem();
 				yield break;
 			}
+
 			yield return null;
 		}
 	}
