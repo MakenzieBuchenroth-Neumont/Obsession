@@ -27,7 +27,6 @@ public class DynamicTitle : MonoBehaviour {
 
 	[Header("Button GameObjects")]
 	[SerializeField] GameObject newGame;
-	[SerializeField] GameObject loadGame;
 	[SerializeField] GameObject settings;
 	[SerializeField] GameObject quit;
 
@@ -71,7 +70,6 @@ public class DynamicTitle : MonoBehaviour {
 			logo.sprite = evilLogo;
 
 			updateButton(newGame, buttonDark, buttonDarkHover, buttonDarkPressed, evilFont);
-			updateButton(loadGame, buttonDark, buttonDarkHover, buttonDarkPressed, evilFont);
 			updateButton(settings, buttonDark, buttonDarkHover, buttonDarkPressed, evilFont);
 			updateButton(quit, buttonDark, buttonDarkHover, buttonDarkPressed, evilFont);
 
@@ -84,7 +82,6 @@ public class DynamicTitle : MonoBehaviour {
 			logo.sprite = cheeryLogo;
 
 			updateButton(newGame, button, buttonHover, buttonPressed, happyFont);
-			updateButton(loadGame, button, buttonHover, buttonPressed, happyFont);
 			updateButton(settings, button, buttonHover, buttonPressed, happyFont);
 			updateButton(quit, button, buttonHover, buttonPressed, happyFont);
 

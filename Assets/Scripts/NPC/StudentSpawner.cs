@@ -23,6 +23,10 @@ public class StudentSpawner : MonoBehaviour {
 			GameObject studentInstance = Instantiate(studentsToSpawn[i].prefab, studentsToSpawn[i].spawnPoint, Quaternion.identity);
 			studentInstance.GetComponent<NPCInteractable>().studentData.Locker = LockerLocations[i];
 			studentInstance.GetComponent<NPCInteractable>().studentData.Seat = SeatLocations[i];
+			studentInstance.GetComponent<NPCInteractable>().studentData.BeforeClass = BeforeClassLocations[i];
+			studentInstance.GetComponent<NPCInteractable>().studentData.Lunch = LunchLocations[i];
+			studentInstance.GetComponent<NPCInteractable>().studentData.AfterClass = AfterClassLocations[i];
+			studentInstance.GetComponent<NPCInteractable>().studentData.Leave = LeaveLocations[i];
 
             studentInstance.transform.position = studentInstance.GetComponent<NPCInteractable>().studentData.spawnPoint;
 

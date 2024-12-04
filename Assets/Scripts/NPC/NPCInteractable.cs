@@ -24,6 +24,7 @@ public class NPCInteractable : MonoBehaviour, IInteractable {
         if (dialogueBox != null) {
             dialogueBox.SetActive(false);
         }
+        studentData.anim = anim;
     }
 
     private GameObject FindDialogueBoxInDontDestroyOnLoad() {

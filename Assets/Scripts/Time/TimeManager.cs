@@ -4,6 +4,7 @@ using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
+using static GameTimestamp;
 
 public class TimeManager : MonoBehaviour {
 	public static TimeManager Instance {  get; private set; }
@@ -114,5 +115,21 @@ public class TimeManager : MonoBehaviour {
 	private void OnDestroy() {
 		Debug.Log("TimeManager is being destroyed. Unsubscribing from scene-loaded event.");
 		SceneManager.sceneLoaded -= OnSceneLoaded;
+	}
+
+	public void goToNextDay() {
+		DayOfTheWeek currentDay = timestamp.GetDayOfTheWeek();
+		if (currentDay == DayOfTheWeek.Friday) {
+			timestamp.day += 2;
+		}
+		else if (currentDay == DayOfTheWeek.Saturday) {
+			timestamp.day += 1;
+		}
+		else {
+			timestamp.day++;
+		}
+		timestamp.hour = 7;
+		timestamp.minute = 0;
+		UIManager.Instance.bedroomPanel.SetActive(false);
 	}
 }

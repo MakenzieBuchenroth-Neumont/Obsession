@@ -19,96 +19,75 @@ MonoBehaviour:
       day: 0
       hour: 7
       minute: 5
-      playerTransform: {fileID: 0}
-      mainCamera: {fileID: 0}
-      bedroomCamera: {fileID: 0}
     dayOfTheWeek: 1
     priority: 0
     ignoreDayOfTheWeek: 1
     factorDate: 0
     location: 0
-    facing: {x: 0, y: 359, z: 0}
+    facing: {x: 0, y: -90, z: 0}
   - name: Before Class
     time:
       day: 0
       hour: 7
       minute: 10
-      playerTransform: {fileID: 0}
-      mainCamera: {fileID: 0}
-      bedroomCamera: {fileID: 0}
     dayOfTheWeek: 1
     priority: 0
     ignoreDayOfTheWeek: 1
     factorDate: 0
     location: 1
-    facing: {x: 0, y: 359, z: 0}
+    facing: {x: 0, y: -270, z: 0}
   - name: Morning Class
     time:
       day: 0
       hour: 8
       minute: 0
-      playerTransform: {fileID: 0}
-      mainCamera: {fileID: 0}
-      bedroomCamera: {fileID: 0}
     dayOfTheWeek: 1
     priority: 0
     ignoreDayOfTheWeek: 1
     factorDate: 0
     location: 2
-    facing: {x: 0, y: 359, z: 0}
+    facing: {x: 0, y: -180, z: 0}
   - name: Lunch
     time:
       day: 0
       hour: 12
       minute: 30
-      playerTransform: {fileID: 0}
-      mainCamera: {fileID: 0}
-      bedroomCamera: {fileID: 0}
     dayOfTheWeek: 1
     priority: 0
     ignoreDayOfTheWeek: 1
     factorDate: 0
     location: 3
-    facing: {x: 0, y: 359, z: 0}
+    facing: {x: 0, y: -270, z: 0}
   - name: Afternoon Class
     time:
       day: 0
       hour: 13
       minute: 0
-      playerTransform: {fileID: 0}
-      mainCamera: {fileID: 0}
-      bedroomCamera: {fileID: 0}
     dayOfTheWeek: 1
     priority: 0
     ignoreDayOfTheWeek: 1
     factorDate: 0
     location: 2
-    facing: {x: 0, y: 359, z: 0}
+    facing: {x: 0, y: -180, z: 0}
   - name: After Class
     time:
       day: 0
       hour: 15
       minute: 0
-      playerTransform: {fileID: 0}
-      mainCamera: {fileID: 0}
-      bedroomCamera: {fileID: 0}
     dayOfTheWeek: 1
     priority: 0
     ignoreDayOfTheWeek: 1
     factorDate: 0
     location: 4
-    facing: {x: 0, y: 359, z: 0}
+    facing: {x: 0, y: -270, z: 0}
   - name: Leave School
     time:
       day: 0
       hour: 17
       minute: 59
-      playerTransform: {fileID: 0}
-      mainCamera: {fileID: 0}
-      bedroomCamera: {fileID: 0}
     dayOfTheWeek: 1
     priority: 0
     ignoreDayOfTheWeek: 1
     factorDate: 0
     location: 5
-    facing: {x: 0, y: 359, z: 0}
+    facing: {x: 0, y: 0, z: 0}

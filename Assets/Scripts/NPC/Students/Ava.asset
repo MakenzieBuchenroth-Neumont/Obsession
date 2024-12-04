@@ -16,7 +16,7 @@ MonoBehaviour:
   year: 2
   personality: 5
   studentClass: 5
-  studentImage: {fileID: 21300000, guid: e4073c15d26044b428594a714a1ca397, type: 3}
+  studentImage: {fileID: 21300000, guid: 24cd0d7de76339d48b6628c78ed617ea, type: 3}
   prefab: {fileID: 4862227891489454819, guid: 058e911dc54c7214492ffd7f77f371a9, type: 3}
   anim: {fileID: 4862227891489454818, guid: 058e911dc54c7214492ffd7f77f371a9, type: 3}
   myScheduleData: {fileID: 11400000, guid: 3120f29fea79714438b5cc49cbcc95dc, type: 2}

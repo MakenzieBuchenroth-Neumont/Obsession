@@ -18,6 +18,10 @@ public class Student : ScriptableObject {
 	[SerializeField] public Vector3 spawnPoint;
 	[SerializeField] public GameObject Locker;
 	[SerializeField] public GameObject Seat;
+	[SerializeField] public GameObject BeforeClass;
+	[SerializeField] public GameObject Lunch;
+	[SerializeField] public GameObject AfterClass;
+	[SerializeField] public GameObject Leave;
 
 	[Header("Dialogue and Quest")]
 	public Quest quest;
@@ -103,6 +107,14 @@ public class Student : ScriptableObject {
 				return Locker.transform.position;
 			case ScheduleEvent.Locations.Seat:
 				return Seat.transform.position;
+			case ScheduleEvent.Locations.BeforeClass:
+				return BeforeClass.transform.position;
+			case ScheduleEvent.Locations.Lunch:
+				return Lunch.transform.position;
+			case ScheduleEvent.Locations.AfterClass:
+				return AfterClass.transform.position;
+			case ScheduleEvent.Locations.Leave:
+				return Leave.transform.position;
 		}
 	}
 }

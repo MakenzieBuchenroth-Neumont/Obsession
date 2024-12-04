@@ -17,6 +17,9 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 	// time ui
 	public TextMeshProUGUI timeText;
 	public TextMeshProUGUI dateText;
+	[SerializeField] TextMeshProUGUI scheduleBlockText;
+
+	[SerializeField] public GameObject bedroomPanel;
 
 	[Header("Inventory System")]
 	// the inventory panel
@@ -28,6 +31,7 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 
 	// the tool slot ui
 	public InventorySlot[] toolSlots;
+
 
 	#region AwakeStartUpdate
 	private void Awake() {
@@ -45,10 +49,14 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 
 		// add UIManager to the list of objects TimeManager will notify when the time updates
 		TimeManager.Instance.registerTracker(this);
+		bedroomPanel.SetActive(false);
 	}
 
 	private void Update() {
 		renderInventory();
+		if (TimeManager.Instance.timestamp.hour == 18) {
+			bedroomPanel.SetActive(true);
+		}
 	}
 	#endregion
 
@@ -131,10 +139,6 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 			prefix = "AM ";
 		}
 
-		if (hours == 0) {
-			hours = 12;
-		}
-
 		//Format it for the time text display
 		timeText.text = + hours + ":" + minutes.ToString("00") + prefix;
 
@@ -147,6 +151,32 @@ public class UIManager : MonoBehaviour, ITimeTracker {
 		// format
 		dateText.text = dayOfTheWeek;
 
+
+		// scheduleBlock text
+		switch (hours) {
+			case 7:
+				scheduleBlockText.text = "Before Class";
+			break;
+			case 8:
+				if (minutes == 15) {
+					scheduleBlockText.text = "Class";
+				} 
+			break;
+			case 12:
+				if (minutes == 30) {
+					scheduleBlockText.text = "Lunch";
+				}
+			break;
+			case 13:
+				scheduleBlockText.text = "Class";
+			break;
+			case 15:
+				scheduleBlockText.text = "After Class";
+			break;
+			case 18:
+				scheduleBlockText.text = "At Home";
+			break;
+		}
 	}
 
 	#region Interaction Prompt
